@@ -14,9 +14,9 @@ internal struct Coordinates
     {
         while (true)
         {
-            if (char.TryParse(ReadKey().KeyChar.ToString(), out char latter) && latter >= 'a' && latter <= 'h')
+            if (char.TryParse(ReadKey().KeyChar.ToString(), out char letter) && letter >= 'a' && letter <= 'h')
             {
-                column = latter - 'a' + 1;
+                column = letter - 'a' + 1;
                 break;
             }
             else
