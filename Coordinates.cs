@@ -1,4 +1,4 @@
-﻿using static System.Console;
+using static System.Console;
 namespace Homework;
 internal struct Coordinates
 {
@@ -10,7 +10,7 @@ internal struct Coordinates
         IsLatter();
         IsNumber();
     }
-    private int IsLatter()
+    private int IsLetter()
     {
         while (true)
         {
