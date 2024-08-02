@@ -7,7 +7,7 @@ internal struct Coordinates
     public Coordinates()
     {
         Write("\nEnter coordinates: ");
-        IsLatter();
+        IsLetter();
         IsNumber();
     }
     private int IsLetter()
