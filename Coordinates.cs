@@ -22,7 +22,6 @@ internal struct Coordinates
     }
     public Coordinates()
     {
-        Write("\nEnter coordinates: ");//Console
         IsLetter();
         IsNumber();
     }
@@ -39,8 +38,9 @@ internal struct Coordinates
             {
                 //Console
                 ForegroundColor = ConsoleColor.Red;
-                WriteLine("Error 3.1: Wrong coordinate.");
+                WriteLine("\nError 3.1: Wrong coordinate.( a - b)");
                 ForegroundColor = ConsoleColor.Gray;
+                Write("Enter coordinates: ");
             }
         }
         return _column;
@@ -58,8 +58,9 @@ internal struct Coordinates
             {
                 //Console
                 ForegroundColor = ConsoleColor.Red;
-                WriteLine("Error 3.2: Wrong coordinate.");
+                WriteLine("\nError 3.2: Wrong coordinate.( 1 - 8 )");
                 ForegroundColor = ConsoleColor.Gray;
+                Write("Enter coordinates: ");
             }
         }
         return _row;

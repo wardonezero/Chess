@@ -58,6 +58,7 @@ while (true)
         if (piece != 0)
             break;
     }
+    Write("\nEnter coordinates: ");
     Coordinates playercoordinates = new();
     WriteLine();
     playPiece = GetPieceSymbol(side, piece);

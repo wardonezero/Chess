@@ -1,6 +1,4 @@
-﻿using System.Text;
-using static System.Console;
-namespace Homework;
+﻿namespace Homework;
 internal class ChessAlgoritms
 {
     /*public void Movement()
