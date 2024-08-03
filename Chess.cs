@@ -12,7 +12,7 @@ internal class Chess
         char playerPiece;
         while (true)
         {
-            Write("Choose White or Black side: ");
+            Write("Choose White or Black side: ");//Console
             playerSide = ReadKey().KeyChar;
             if (playerSide == 'b' || playerSide == 'w')
             {
@@ -22,13 +22,13 @@ internal class Chess
             else
             {
                 ForegroundColor = ConsoleColor.Red;
-                WriteLine("\nError 1: Choose black or white ( b / w )");
+                WriteLine("\nError 1: Choose black or white ( b / w )");//Console
                 ForegroundColor = ConsoleColor.Gray;
             }
         }
         while (true)
         {
-            Write("\nChoose your chess piece.\nBishop  Knight  Rook  Queen  King: ");
+            Write("\nChoose your chess piece.\nBishop  Knight  Rook  Queen  King: ");//Console
             playerPiece = ReadKey().KeyChar;
             switch (playerPiece)
             {
@@ -49,7 +49,7 @@ internal class Chess
                     break;
                 default:
                     ForegroundColor = ConsoleColor.Red;
-                    Write("\nError 2: There is no such a piece.\n Enter b, k, r, q or  K");
+                    Write("\nError 2: There is no such a piece.\n Enter b, k, r, q or  K");//Console
                     ForegroundColor = ConsoleColor.Gray;
                     break;
             }
@@ -62,7 +62,7 @@ internal class Chess
         char[,] board = FillChessBoard(playPiece, playercoordinates);
         DisplayChessBoard(board);
     }
-    private static void DisplayChessBoard(char[,] board)
+    private static void DisplayChessBoard(char[,] board)//Cansole
     {
         for (int i = 0; i <= 8; i++)
         {

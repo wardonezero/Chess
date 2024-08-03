@@ -2,11 +2,27 @@ using static System.Console;
 namespace Homework;
 internal struct Coordinates
 {
-    public int column;
-    public int row;
+    private int _column;
+    private int _row;
+    public int column
+    {
+        get { return _column; }
+        set
+        {
+            
+        }
+    }
+    public int row
+    {
+        get { return _row; }
+        //set
+        //{
+        //    _column = value;
+        //}
+    }
     public Coordinates()
     {
-        Write("\nEnter coordinates: ");
+        Write("\nEnter coordinates: ");//Console
         IsLetter();
         IsNumber();
     }
@@ -16,17 +32,17 @@ internal struct Coordinates
         {
             if (char.TryParse(ReadKey().KeyChar.ToString(), out char letter) && letter >= 'a' && letter <= 'h')
             {
-                column = letter - 'a' + 1;
+                _column = letter - 'a' + 1;
                 break;
             }
             else
             {
                 ForegroundColor = ConsoleColor.Red;
-                WriteLine("Error 3.1: Wrong coordinate.");
+                WriteLine("Error 3.1: Wrong coordinate.");//Console
                 ForegroundColor = ConsoleColor.Gray;
             }
         }
-        return column;
+        return _column;
     }
     private int IsNumber()
     {
@@ -34,16 +50,16 @@ internal struct Coordinates
         {
             if (char.TryParse(ReadKey().KeyChar.ToString(), out char number) && number >= '1' && number <= '8')
             {
-                row = number - '1' + 1;
+                _row = number - '1' + 1;
                 break;
             }
             else
             {
                 ForegroundColor = ConsoleColor.Red;
-                WriteLine("Error 3.2: Wrong coordinate.");
+                WriteLine("Error 3.2: Wrong coordinate.");//Console
                 ForegroundColor = ConsoleColor.Gray;
             }
         }
-        return row;
+        return _row;
     }
 }
