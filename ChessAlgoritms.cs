@@ -64,34 +64,6 @@ internal class ChessAlgoritms
         char[,] board = FillChessBoard(playPiece, playercoordinates);
         DisplayChessBoard(board);
     }*/
-    public static void DisplayChessBoard(char[,] board)//Cansole
-    {
-        for (int i = 0; i <= 8; i++)
-        {
-            for (int j = 0; j <= 8; j++)
-            {
-                if (i == 0 || j == 0)
-                {
-                    BackgroundColor = ConsoleColor.Black;
-                    ForegroundColor = ConsoleColor.Gray;
-                }
-                else if ((i + j) % 2 == 0)
-                {
-                    BackgroundColor = ConsoleColor.White;
-                    ForegroundColor = ConsoleColor.DarkGray;
-                }
-                else
-                {
-                    BackgroundColor = ConsoleColor.Black;
-                    ForegroundColor = ConsoleColor.DarkGray;
-                }
-                Write($" {board[i, j]} ");
-                BackgroundColor = ConsoleColor.Black;
-                ForegroundColor = ConsoleColor.Gray;
-            }
-            WriteLine();
-        }
-    }
     public static char[,] FillChessBoard(char playPiece, Coordinates coordinates)
     {
         char[,] board = new char[9, 9];

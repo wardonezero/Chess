@@ -2,13 +2,15 @@
 using static Homework.ChessAlgoritms;
 using static System.Console;
 using System.Text;
+OutputEncoding = Encoding.UTF8;
+ChessSides side = new();
+ChessPieces piece = new();
+char playerSide;
+char playerPiece;
+char[,] board;
+char playPiece;
 while (true)
 {
-    OutputEncoding = Encoding.UTF8;
-    ChessSides side = new();
-    ChessPieces piece = new();
-    char playerSide;
-    char playerPiece;
     while (true)
     {
         Write("Choose White or Black side: ");
@@ -58,7 +60,35 @@ while (true)
     }
     Coordinates playercoordinates = new();
     WriteLine();
-    char playPiece = GetPieceSymbol(side, piece);
-    char[,] board = FillChessBoard(playPiece, playercoordinates);
+    playPiece = GetPieceSymbol(side, piece);
+    board = FillChessBoard(playPiece, playercoordinates);
     DisplayChessBoard(board);
+}
+void DisplayChessBoard(char[,] board)//Cansole
+{
+    for (int i = 0; i <= 8; i++)
+    {
+        for (int j = 0; j <= 8; j++)
+        {
+            if (i == 0 || j == 0)
+            {
+                BackgroundColor = ConsoleColor.Black;
+                ForegroundColor = ConsoleColor.Gray;
+            }
+            else if ((i + j) % 2 == 0)
+            {
+                BackgroundColor = ConsoleColor.White;
+                ForegroundColor = ConsoleColor.DarkGray;
+            }
+            else
+            {
+                BackgroundColor = ConsoleColor.Black;
+                ForegroundColor = ConsoleColor.DarkGray;
+            }
+            Write($" {board[i, j]} ");
+            BackgroundColor = ConsoleColor.Black;
+            ForegroundColor = ConsoleColor.Gray;
+        }
+        WriteLine();
+    }
 }
