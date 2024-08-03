@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using static System.Console;
 namespace Homework;
-internal class Chess
+internal class ChessAlgoritms
 {
-    public static void Movement()
+    /*public void Movement()
     {
         OutputEncoding = Encoding.UTF8;
         ChessSides side = new();
@@ -21,8 +21,9 @@ internal class Chess
             }
             else
             {
+                //Console
                 ForegroundColor = ConsoleColor.Red;
-                WriteLine("\nError 1: Choose black or white ( b / w )");//Console
+                WriteLine("\nError 1: Choose black or white ( b / w )");
                 ForegroundColor = ConsoleColor.Gray;
             }
         }
@@ -48,8 +49,9 @@ internal class Chess
                     piece = ChessPieces.King;
                     break;
                 default:
+                    //Console
                     ForegroundColor = ConsoleColor.Red;
-                    Write("\nError 2: There is no such a piece.\n Enter b, k, r, q or  K");//Console
+                    Write("\nError 2: There is no such a piece.\n Enter b, k, r, q or  K");
                     ForegroundColor = ConsoleColor.Gray;
                     break;
             }
@@ -61,8 +63,8 @@ internal class Chess
         char playPiece = GetPieceSymbol(side, piece);
         char[,] board = FillChessBoard(playPiece, playercoordinates);
         DisplayChessBoard(board);
-    }
-    private static void DisplayChessBoard(char[,] board)//Cansole
+    }*/
+    public static void DisplayChessBoard(char[,] board)//Cansole
     {
         for (int i = 0; i <= 8; i++)
         {
@@ -90,7 +92,7 @@ internal class Chess
             WriteLine();
         }
     }
-    private static char[,] FillChessBoard(char playPiece, Coordinates coordinates)
+    public static char[,] FillChessBoard(char playPiece, Coordinates coordinates)
     {
         char[,] board = new char[9, 9];
         for (int i = 0; i <= 8; i++)
@@ -108,7 +110,7 @@ internal class Chess
         board[9 - coordinates.row, coordinates.column] = playPiece;
         return board;
     }
-    private static char GetPieceSymbol(ChessSides side, ChessPieces piece)
+    public static char GetPieceSymbol(ChessSides side, ChessPieces piece)
     {
         switch (side)
         {

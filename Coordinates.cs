@@ -37,8 +37,9 @@ internal struct Coordinates
             }
             else
             {
+                //Console
                 ForegroundColor = ConsoleColor.Red;
-                WriteLine("Error 3.1: Wrong coordinate.");//Console
+                WriteLine("Error 3.1: Wrong coordinate.");
                 ForegroundColor = ConsoleColor.Gray;
             }
         }
@@ -55,8 +56,9 @@ internal struct Coordinates
             }
             else
             {
+                //Console
                 ForegroundColor = ConsoleColor.Red;
-                WriteLine("Error 3.2: Wrong coordinate.");//Console
+                WriteLine("Error 3.2: Wrong coordinate.");
                 ForegroundColor = ConsoleColor.Gray;
             }
         }
