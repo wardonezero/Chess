@@ -2,6 +2,8 @@
 using static Homework.ChessAlgoritms;
 using static System.Console;
 using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Common;
 OutputEncoding = Encoding.UTF8;
 ChessSides side = new();
 ChessPieces piece = new();
