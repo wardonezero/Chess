@@ -15,10 +15,10 @@ internal struct Coordinates
     public int row
     {
         get { return _row; }
-        //set
-        //{
-        //    _column = value;
-        //}
+        set
+        {
+            
+        }
     }
     public Coordinates()
     {
