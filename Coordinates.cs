@@ -1,71 +1,86 @@
 using static System.Console;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Homework;
 internal struct Coordinates
 {
-    private char _column;
-    private int _row;
-    private int[] coordinates = new int[2];
-    public int column
+    private char _letter;
+    private int _number;
+    public int[] coordinates = new int[2];
+    public char Letter
     {
-        get { return _column; }
+        get { return _letter; }
         set
         {
-            
+            if (value >= 'a' && value <= 'h')
+            {
+                _number = value;
+                coordinates[0] = _letter - 'a' + 1;
+            }
+            else
+            {
+                throw new ArgumentException("Error 3.1: Wrong coordinate.( a - b)");
+            }
         }
     }
-    public int row
+    public int Number
     {
-        get { return _row; }
+        get { return _number; }
         set
         {
-            
+            if((char)value >= '1' && (char)value <= '8')
+            {
+                _number = value;
+                coordinates[1] = value;
+            }
+            else
+            {
+                throw new ArgumentException("Error 3.2: Wrong coordinate.( 1 - 8 )");
+            }
         }
     }
     public Coordinates()
     {
-        IsLetter();
-        IsNumber();
     }
-    private int IsLetter()
-    {
-        while (true)
-        {
-            if (char.TryParse(ReadKey().KeyChar.ToString(), out char letter) && letter >= 'a' && letter <= 'h')
-            {
-                //_column = letter - 'a' + 1;
-                coordinates[0] = letter;
-                break;
-            }
-            else
-            {
-                //Console
-                ForegroundColor = ConsoleColor.Red;
-                WriteLine("\nError 3.1: Wrong coordinate.( a - b)");
-                ForegroundColor = ConsoleColor.Gray;
-                Write("Enter coordinates: ");
-            }
-        }
-        return _column;
-    }
-    private int IsNumber()
-    {
-        while (true)
-        {
-            if (char.TryParse(ReadKey().KeyChar.ToString(), out char number) && number >= '1' && number <= '8')
-            {
-                //_row = number - '1' + 1;
-                coordinates[1] = _row;
-                break;
-            }
-            else
-            {
-                //Console
-                ForegroundColor = ConsoleColor.Red;
-                WriteLine("\nError 3.2: Wrong coordinate.( 1 - 8 )");
-                ForegroundColor = ConsoleColor.Gray;
-                Write("Enter coordinates: ");
-            }
-        }
-        return _row;
-    }
+    //private char IsLetter()
+    //{
+    //    while (true)
+    //    {
+    //        if (char.TryParse(ReadKey().KeyChar.ToString(), out char letter) && letter >= 'a' && letter <= 'h')
+    //        {
+    //            _letter = letter;
+    //            coordinates[0] = letter - 'a' + 1;
+    //            break;
+    //        }
+    //        else
+    //        {
+    //            //Console
+    //            ForegroundColor = ConsoleColor.Red;
+    //            WriteLine("\nError 3.1: Wrong coordinate.( a - b)");
+    //            ForegroundColor = ConsoleColor.Gray;
+    //            Write("Enter coordinates: ");
+    //        }
+    //    }
+    //    return _letter;
+    //}
+    //private int IsNumber()
+    //{
+    //    while (true)
+    //    {
+    //        if (char.TryParse(ReadKey().KeyChar.ToString(), out char number) && number >= '1' && number <= '8')
+    //        {
+    //            _number = number - '1' + 1;
+    //            coordinates[1] = _number;
+    //            break;
+    //        }
+    //        else
+    //        {
+    //            //Console
+    //            ForegroundColor = ConsoleColor.Red;
+    //            WriteLine("\nError 3.2: Wrong coordinate.( 1 - 8 )");
+    //            ForegroundColor = ConsoleColor.Gray;
+    //            Write("Enter coordinates: ");
+    //        }
+    //    }
+    //    return _number;
+    //}
 }

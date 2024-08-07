@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
 OutputEncoding = Encoding.UTF8;
-ChessSides side = new();
+PicesColor side = new();
 ChessPieces piece = new();
 char playerSide;
 char playerPiece;
@@ -19,7 +19,7 @@ while (true)
         playerSide = ReadKey().KeyChar;
         if (playerSide == 'b' || playerSide == 'w')
         {
-            side = playerSide == 'b' ? (ChessSides)1 : 0;
+            side = playerSide == 'b' ? (PicesColor)1 : 0;
             break;
         }
         else
@@ -62,6 +62,36 @@ while (true)
     }
     Write("\nEnter coordinates: ");
     Coordinates playercoordinates = new();
+    do
+    {
+        try
+        {
+            playercoordinates.Letter = ReadKey().KeyChar;
+            break;
+        }
+        catch (Exception e)
+        {
+            ForegroundColor = ConsoleColor.Red;
+            WriteLine($"\n{e.Message}");
+            ForegroundColor = ConsoleColor.Gray;
+            Write("Enter coordinate: ");
+        }
+    } while (true);
+    do
+    {
+        try
+        {
+            playercoordinates.Number = ReadKey().KeyChar;
+            break;
+        }
+        catch (Exception e)
+        {
+            ForegroundColor = ConsoleColor.Red;
+            WriteLine($"\n{e.Message}");
+            ForegroundColor = ConsoleColor.Gray;
+            Write("Enter coordinate: ");
+        }
+    } while (true);
     WriteLine();
     playPiece = GetPieceSymbol(side, piece);
     board = FillChessBoard(playPiece, playercoordinates);

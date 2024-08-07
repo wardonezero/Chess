@@ -1,5 +1,5 @@
 ﻿namespace Homework;
-enum ChessSides
+enum PicesColor
 {
     White,
     Black
