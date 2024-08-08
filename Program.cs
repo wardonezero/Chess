@@ -1,13 +1,11 @@
-﻿using Homework;
-using static Homework.ChessAlgoritms;
-using static System.Console;
+﻿using Chess;
 using System.Text;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Common;
+using static Chess.ChessAlgoritms;
+using static System.Console;
 OutputEncoding = Encoding.UTF8;
-PicesColor side = new();
+PicesColor color = new();
 ChessPieces piece = new();
-char playerSide;
+char playerColor;
 char playerPiece;
 char[,] board;
 char playPiece;
@@ -15,11 +13,11 @@ while (true)
 {
     while (true)
     {
-        Write("Choose White or Black side: ");
-        playerSide = ReadKey().KeyChar;
-        if (playerSide == 'b' || playerSide == 'w')
+        Write("Choose White or Black color: ");
+        playerColor = ReadKey().KeyChar;
+        if (playerColor == 'b' || playerColor == 'w')
         {
-            side = playerSide == 'b' ? (PicesColor)1 : 0;
+            color = playerColor == 'b' ? (PicesColor)1 : 0;
             break;
         }
         else
@@ -93,11 +91,11 @@ while (true)
         }
     } while (true);
     WriteLine();
-    playPiece = GetPieceSymbol(side, piece);
+    playPiece = GetPieceSymbol(color, piece);
     board = FillChessBoard(playPiece, playercoordinates);
     DisplayChessBoard(board);
 }
-void DisplayChessBoard(char[,] board)//Cansole
+static void DisplayChessBoard(char[,] board)
 {
     for (int i = 0; i <= 8; i++)
     {

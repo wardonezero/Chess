@@ -1,6 +1,4 @@
-using static System.Console;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-namespace Homework;
+namespace Chess;
 internal struct Coordinates
 {
     private char _letter;

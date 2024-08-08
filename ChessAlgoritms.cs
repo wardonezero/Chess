@@ -1,5 +1,5 @@
-﻿namespace Homework;
-internal class ChessAlgoritms
+﻿namespace Chess;
+internal static class ChessAlgoritms
 {
     /*public void Movement()
     {

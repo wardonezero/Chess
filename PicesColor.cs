@@ -1,4 +1,4 @@
-﻿namespace Homework;
+﻿namespace Chess;
 enum PicesColor
 {
     White,
