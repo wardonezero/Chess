@@ -77,7 +77,7 @@ internal class ChessAlgoritms
                     board[i, j] = ' ';
             }
         }
-        board[1 + coordinates.coordinates[1], coordinates.coordinates[0]] = playPiece;
+        board[9 - coordinates.coordinates[1], coordinates.coordinates[0]] = playPiece;
         return board;
     }
     public static char GetPieceSymbol(PicesColor side, ChessPieces piece)

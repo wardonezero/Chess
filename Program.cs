@@ -89,7 +89,7 @@ while (true)
             ForegroundColor = ConsoleColor.Red;
             WriteLine($"\n{e.Message}");
             ForegroundColor = ConsoleColor.Gray;
-            Write("Enter coordinate: ");
+            Write($"Enter coordinate: {playercoordinates.Letter}");
         }
     } while (true);
     WriteLine();

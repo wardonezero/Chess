@@ -13,7 +13,7 @@ internal struct Coordinates
         {
             if (value >= 'a' && value <= 'h')
             {
-                _number = value;
+                _letter = value;
                 coordinates[0] = _letter - 'a' + 1;
             }
             else
@@ -27,10 +27,10 @@ internal struct Coordinates
         get { return _number; }
         set
         {
-            if((char)value >= '1' && (char)value <= '8')
+            if (value >= 49 && value <= 56)
             {
-                _number = value;
-                coordinates[1] = value;
+                _number = value - 48;
+                coordinates[1] = value - 48;
             }
             else
             {
