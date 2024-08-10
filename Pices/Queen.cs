@@ -1,5 +1,5 @@
 ﻿namespace Chess;
-internal class Queen : Pices
+internal class Queen : Pieces
 {
 
 }

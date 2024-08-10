@@ -1,4 +1,4 @@
 ﻿namespace Chess;
-internal class Bishop : Pices
+internal class Bishop : Pieces
 {
 }

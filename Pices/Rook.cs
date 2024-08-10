@@ -1,4 +1,4 @@
 ﻿namespace Chess;
-internal class Rook : Pices
+internal class Rook : Pieces
 {
 }

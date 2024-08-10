@@ -80,12 +80,12 @@ internal static class ChessAlgoritms
         board[9 - coordinates.coordinates[1], coordinates.coordinates[0]] = playPiece;
         return board;
     }
-    public static char GetPieceSymbol(PicesColor side, ChessPieces piece)
+    public static char GetPieceSymbol(Pieces playerPieces)
     {
-        switch (side)
+        switch (playerPieces.Color)
         {
             case PicesColor.White:
-                switch (piece)
+                switch (playerPieces.PiecsChar)
                 {
                     case ChessPieces.Bishop:
                         return '♗';
@@ -101,7 +101,7 @@ internal static class ChessAlgoritms
                         return '♙';
                 }
             case PicesColor.Black:
-                switch (piece)
+                switch (playerPieces.PiecsChar)
                 {
                     case ChessPieces.Bishop:
                         return '♝';

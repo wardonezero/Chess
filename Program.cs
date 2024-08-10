@@ -3,68 +3,47 @@ using System.Text;
 using static Chess.ChessAlgoritms;
 using static System.Console;
 OutputEncoding = Encoding.UTF8;
-PicesColor color = new();
-ChessPieces piece = new();
-char playerColor;
-char playerPiece;
 char[,] board;
+Pieces playerPiece1 = new();
 char playPiece;
 while (true)
 {
     while (true)
     {
         Write("Choose White or Black color: ");
-        playerColor = ReadKey().KeyChar;
-        if (playerColor == 'b' || playerColor == 'w')
+        try
         {
-            color = playerColor == 'b' ? (PicesColor)1 : 0;
+            playerPiece1.Color = (PicesColor)ReadKey().KeyChar;
             break;
         }
-        else
+        catch(Exception e)
         {
             ForegroundColor = ConsoleColor.Red;
-            WriteLine("\nError 1: Choose black or white ( b / w )");
+            WriteLine($"\n{e.Message}");
             ForegroundColor = ConsoleColor.Gray;
         }
     }
     while (true)
     {
         Write("\nChoose your chess piece.\nBishop  Knight  Rook  Queen  King: ");
-        playerPiece = ReadKey().KeyChar;
-        switch (playerPiece)
+        try
         {
-            case 'b':
-                piece = ChessPieces.Bishop;
-                break;
-            case 'k':
-                piece = ChessPieces.Knight;
-                break;
-            case 'r':
-                piece = ChessPieces.Rook;
-                break;
-            case 'q':
-                piece = ChessPieces.Queen;
-                break;
-            case 'K':
-                piece = ChessPieces.King;
-                break;
-            default:
-                //Console
-                ForegroundColor = ConsoleColor.Red;
-                Write("\nError 2: There is no such a piece.\n Enter b, k, r, q or  K");
-                ForegroundColor = ConsoleColor.Gray;
-                break;
-        }
-        if (piece != 0)
+            playerPiece1.PiecsChar = (ChessPieces)ReadKey().KeyChar;
             break;
+        }
+        catch (Exception e)
+        {
+            WriteLine($"\n{e.Message}");
+        }
     }
     Write("\nEnter coordinates: ");
-    Coordinates playercoordinates = new();
+
+    Coordinates currentCoord = new Coordinates();
     do
     {
         try
         {
-            playercoordinates.Letter = ReadKey().KeyChar;
+            currentCoord.Letter = ReadKey().KeyChar;
             break;
         }
         catch (Exception e)
@@ -79,7 +58,7 @@ while (true)
     {
         try
         {
-            playercoordinates.Number = ReadKey().KeyChar;
+            currentCoord.Number = ReadKey().KeyChar;
             break;
         }
         catch (Exception e)
@@ -87,12 +66,15 @@ while (true)
             ForegroundColor = ConsoleColor.Red;
             WriteLine($"\n{e.Message}");
             ForegroundColor = ConsoleColor.Gray;
-            Write($"Enter coordinate: {playercoordinates.Letter}");
+            Write($"Enter coordinate: {playerPiece1.Coordinates1.Letter}");
         }
     } while (true);
+
+    playerPiece1.Coordinates1 = currentCoord;
+
     WriteLine();
-    playPiece = GetPieceSymbol(color, piece);
-    board = FillChessBoard(playPiece, playercoordinates);
+    playPiece = GetPieceSymbol(playerPiece1);
+    board = FillChessBoard(playPiece, playerPiece1.Coordinates1);
     DisplayChessBoard(board);
 }
 static void DisplayChessBoard(char[,] board)
