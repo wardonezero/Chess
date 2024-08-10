@@ -6,6 +6,7 @@ OutputEncoding = Encoding.UTF8;
 char[,] board;
 Pieces playerPiece1 = new();
 char playPiece;
+Coordinates pc = new();
 while (true)
 {
     while (true)
@@ -37,13 +38,15 @@ while (true)
         }
     }
     Write("\nEnter coordinates: ");
-
-    Coordinates currentCoord = new Coordinates();
     do
     {
         try
         {
-            currentCoord.Letter = ReadKey().KeyChar;
+            pc.Letter = ReadKey().KeyChar;
+            pc.Number = ReadKey().KeyChar;
+            playerPiece1.coord = pc;
+            //playerPiece1.coord.Letter = ReadKey().KeyChar;
+            //playerPiece1.coord.Number = ReadKey().KeyChar;
             break;
         }
         catch (Exception e)
@@ -54,27 +57,10 @@ while (true)
             Write("Enter coordinate: ");
         }
     } while (true);
-    do
-    {
-        try
-        {
-            currentCoord.Number = ReadKey().KeyChar;
-            break;
-        }
-        catch (Exception e)
-        {
-            ForegroundColor = ConsoleColor.Red;
-            WriteLine($"\n{e.Message}");
-            ForegroundColor = ConsoleColor.Gray;
-            Write($"Enter coordinate: {playerPiece1.Coordinates1.Letter}");
-        }
-    } while (true);
-
-    playerPiece1.Coordinates1 = currentCoord;
 
     WriteLine();
     playPiece = GetPieceSymbol(playerPiece1);
-    board = FillChessBoard(playPiece, playerPiece1.Coordinates1);
+    board = FillChessBoard(playPiece, playerPiece1);
     DisplayChessBoard(board);
 }
 static void DisplayChessBoard(char[,] board)

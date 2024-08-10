@@ -62,7 +62,7 @@ internal static class ChessAlgoritms
         char[,] board = FillChessBoard(playPiece, playercoordinates);
         DisplayChessBoard(board);
     }*/
-    public static char[,] FillChessBoard(char playPiece, Coordinates coordinates)
+    public static char[,] FillChessBoard(char playPiece, Pieces player)
     {
         char[,] board = new char[9, 9];
         for (int i = 0; i <= 8; i++)
@@ -77,7 +77,7 @@ internal static class ChessAlgoritms
                     board[i, j] = ' ';
             }
         }
-        board[9 - coordinates.coordinates[1], coordinates.coordinates[0]] = playPiece;
+        board[9 - player.coord.coordinates[1], player.coord.coordinates[0]] = playPiece;
         return board;
     }
     public static char GetPieceSymbol(Pieces playerPieces)

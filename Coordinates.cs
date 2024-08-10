@@ -3,7 +3,16 @@ internal struct Coordinates
 {
     private char _letter;
     private int _number;
-    public int[] coordinates = new int[2] {0,0};
+    private int[] _coordinates = new int[2];
+    public int[] coordinates
+    {
+        get { return _coordinates; }
+        set
+        {
+            _coordinates[0] = _letter - 'a' + 1;
+            _coordinates[1] = _number;
+        }
+    }
     public char Letter
     {
         get { return _letter; }
@@ -12,11 +21,7 @@ internal struct Coordinates
             if (value >= 'a' && value <= 'h')
             {
                 _letter = value;
-                int x = (int)_letter;
-                int y = (int)'a';
-                coordinates[0] = x - y + 1;
-
-                //coordinates[0] = (int)_letter - (int)'a' + 1;
+                coordinates[0] = _letter - 'a' + 1;
             }
             else
             {
@@ -32,7 +37,7 @@ internal struct Coordinates
             if (value >= 49 && value <= 56)
             {
                 _number = value - 48;
-                coordinates[1] = value - 48;
+                coordinates[1] = _number;
             }
             else
             {

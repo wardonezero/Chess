@@ -3,8 +3,8 @@ internal class Pieces
 {
     private PicesColor _color;
     private ChessPieces _pieces;
-    public Coordinates Coordinates1 { get; set; }
-    public PicesColor Color 
+    public Coordinates coord;
+    public PicesColor Color
     {
         get { return _color; }
         set
@@ -19,7 +19,7 @@ internal class Pieces
             }
         }
     }
-    public ChessPieces PiecsChar 
+    public ChessPieces PiecsChar
     {
         get { return _pieces; }
         set
