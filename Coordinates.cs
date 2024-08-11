@@ -6,7 +6,7 @@ internal struct Coordinates
     private int[] _coordinates;
     public int[] CoordinatesArray
     {
-        get { return _coordinates; }
+        readonly get { return _coordinates; }
         set
         {
             _coordinates = [ 0, 0 ];
@@ -16,7 +16,7 @@ internal struct Coordinates
     }
     public char Letter
     {
-        get { return _letter; }
+        readonly get { return _letter; }
         set
         {
             if (value >= 'a' && value <= 'h')
@@ -31,7 +31,7 @@ internal struct Coordinates
     }
     public int Number
     {
-        get { return _number; }
+        readonly get { return _number; }
         set
         {
             if (value >= 49 && value <= 56)
@@ -43,9 +43,6 @@ internal struct Coordinates
                 throw new ArgumentException("Error 3.2: Wrong coordinate.( 1 - 8 )");
             }
         }
-    }
-    public Coordinates(char letter, int number)
-    {
     }
     //private char IsLetter()
     //{

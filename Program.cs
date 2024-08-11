@@ -6,7 +6,7 @@ OutputEncoding = Encoding.UTF8;
 char[,] board;
 Pieces playerPiece1 = new();
 char playPiece;
-Coordinates pc = new();
+//Coordinates pc = new();
 while (true)
 {
     while (true)
