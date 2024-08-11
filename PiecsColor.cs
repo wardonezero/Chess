@@ -1,5 +1,5 @@
 ﻿namespace Chess;
-enum PicesColor
+enum PiecsColor
 {
     White,
     Black

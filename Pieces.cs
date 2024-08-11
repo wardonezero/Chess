@@ -1,17 +1,43 @@
-﻿namespace Chess;
+﻿using System.Transactions;
+
+namespace Chess;
 internal class Pieces
 {
-    private PicesColor _color;
+    private PiecsColor _color;
     private ChessPieces _pieces;
-    public Coordinates coord;
-    public PicesColor Color
+    private Coordinates _currentCoordinates;
+    public int[] CurrentCoordinateArray
+    {
+        get { return _currentCoordinates.CoordinatesArray; }
+        set
+        {
+            _currentCoordinates.CoordinatesArray = value;
+        }
+    }
+    public char CurrentCoordinateLetter
+    {
+        get { return _currentCoordinates.Letter; }
+        set
+        {
+            _currentCoordinates.Letter = value;
+        }
+    }
+    public int CurrentCoordinateNumber
+    {
+        get { return _currentCoordinates.Number; }
+        set
+        {
+            _currentCoordinates.Number = value;
+        }
+    }
+    public PiecsColor Color
     {
         get { return _color; }
         set
         {
             if ((char)value == 'b' || (char)value == 'w')
             {
-                _color = (char)value == 'b' ? (PicesColor)1 : 0;
+                _color = (char)value == 'b' ? (PiecsColor)1 : 0;
             }
             else
             {

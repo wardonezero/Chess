@@ -14,10 +14,10 @@ while (true)
         Write("Choose White or Black color: ");
         try
         {
-            playerPiece1.Color = (PicesColor)ReadKey().KeyChar;
+            playerPiece1.Color = (PiecsColor)ReadKey().KeyChar;
             break;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             ForegroundColor = ConsoleColor.Red;
             WriteLine($"\n{e.Message}");
@@ -42,11 +42,12 @@ while (true)
     {
         try
         {
-            pc.Letter = ReadKey().KeyChar;
-            pc.Number = ReadKey().KeyChar;
-            playerPiece1.coord = pc;
-            //playerPiece1.coord.Letter = ReadKey().KeyChar;
-            //playerPiece1.coord.Number = ReadKey().KeyChar;
+            //pc.Letter = ReadKey().KeyChar;
+            //pc.Number = ReadKey().KeyChar;
+            //playerPiece1.currentCoordinates = pc;
+            playerPiece1.CurrentCoordinateLetter = ReadKey().KeyChar;
+            playerPiece1.CurrentCoordinateNumber = ReadKey().KeyChar;
+            playerPiece1.CurrentCoordinateArray = [ playerPiece1.CurrentCoordinateLetter,playerPiece1.CurrentCoordinateNumber ];
             break;
         }
         catch (Exception e)

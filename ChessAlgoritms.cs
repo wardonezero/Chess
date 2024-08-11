@@ -77,14 +77,14 @@ internal static class ChessAlgoritms
                     board[i, j] = ' ';
             }
         }
-        board[9 - player.coord.coordinates[1], player.coord.coordinates[0]] = playPiece;
+        board[9 - player.CurrentCoordinateArray[1], player.CurrentCoordinateArray[0]] = playPiece;
         return board;
     }
     public static char GetPieceSymbol(Pieces playerPieces)
     {
         switch (playerPieces.Color)
         {
-            case PicesColor.White:
+            case PiecsColor.White:
                 switch (playerPieces.PiecsChar)
                 {
                     case ChessPieces.Bishop:
@@ -100,7 +100,7 @@ internal static class ChessAlgoritms
                     default:
                         return '♙';
                 }
-            case PicesColor.Black:
+            case PiecsColor.Black:
                 switch (playerPieces.PiecsChar)
                 {
                     case ChessPieces.Bishop:
