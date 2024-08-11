@@ -6,6 +6,7 @@ internal class Pieces
     private PiecsColor _color;
     private ChessPieces _pieces;
     private Coordinates _currentCoordinates;
+    private Coordinates _moveCoordinates;
     public int[] CurrentCoordinateArray
     {
         get { return _currentCoordinates.CoordinatesArray; }
@@ -71,5 +72,33 @@ internal class Pieces
                     throw new ArgumentException("Error 2: There is no such a piece.\n Enter b, k, r, q or  K");
             }
         }
+    }
+    public int[] MoveCoordinateArray
+    {
+        get { return _moveCoordinates.CoordinatesArray; }
+        set
+        {
+            _moveCoordinates.CoordinatesArray = value;
+        }
+    }
+    public char MoveCoordinateLetter
+    {
+        get { return _moveCoordinates.Letter; }
+        set
+        {
+            _moveCoordinates.Letter = value;
+        }
+    }
+    public int MoveCoordinateNumber
+    {
+        get { return _moveCoordinates.Number; }
+        set
+        {
+            _moveCoordinates.Number = value;
+        }
+    }
+    public virtual bool Move()
+    {
+        return false;
     }
 }
