@@ -4,7 +4,7 @@ namespace Chess;
 internal class Pieces
 {
     private PiecsColor _color;
-    private ChessPieces _pieces;
+    private static ChessPieces _pieces;
     private Coordinates _current;
     private Coordinates _move;
     public int[] CurrentCoordinate
