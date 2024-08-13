@@ -6,7 +6,6 @@ OutputEncoding = Encoding.UTF8;
 char[,] board;
 Pieces playerPiece1 = new();
 char playPiece;
-//Coordinates pc = new();
 while (true)
 {
     while (true)
@@ -42,12 +41,9 @@ while (true)
     {
         try
         {
-            //pc.Letter = ReadKey().KeyChar;
-            //pc.Number = ReadKey().KeyChar;
-            //playerPiece1.currentCoordinates = pc;
             playerPiece1.CurrentCoordinateLetter = ReadKey().KeyChar;
             playerPiece1.CurrentCoordinateNumber = ReadKey().KeyChar;
-            playerPiece1.CurrentCoordinateArray = [ playerPiece1.CurrentCoordinateLetter,playerPiece1.CurrentCoordinateNumber ];
+            playerPiece1.CurrentCoordinate = [ playerPiece1.CurrentCoordinateLetter,playerPiece1.CurrentCoordinateNumber ];
             break;
         }
         catch (Exception e)

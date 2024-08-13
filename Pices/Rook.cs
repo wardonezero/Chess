@@ -3,7 +3,7 @@ internal class Rook : Pieces
 {
     public override bool Move()
     {
-        if (CurrentCoordinateArray[1] == MoveCoordinateArray[1] || CurrentCoordinateArray[0] == MoveCoordinateArray[0])
+        if (CurrentCoordinate[1] == MoveCoordinate[1] || CurrentCoordinate[0] == MoveCoordinate[0])
         {
             return true;
         }

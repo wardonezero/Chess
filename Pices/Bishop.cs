@@ -3,7 +3,7 @@ internal class Bishop : Pieces
 {
     public override bool Move()
     {
-        if (MoveCoordinateArray[0] - CurrentCoordinateArray[0] == MoveCoordinateArray[1] - CurrentCoordinateArray[1] || MoveCoordinateArray[0] - CurrentCoordinateArray[0] == CurrentCoordinateArray[1] - MoveCoordinateArray[1])
+        if (MoveCoordinate[0] - CurrentCoordinate[0] == MoveCoordinate[1] - CurrentCoordinate[1] || MoveCoordinate[0] - CurrentCoordinate[0] == CurrentCoordinate[1] - MoveCoordinate[1])
         {
             return true;
         }

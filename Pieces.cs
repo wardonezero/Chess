@@ -5,30 +5,30 @@ internal class Pieces
 {
     private PiecsColor _color;
     private ChessPieces _pieces;
-    private Coordinates _currentCoordinates;
-    private Coordinates _moveCoordinates;
-    public int[] CurrentCoordinateArray
+    private Coordinates _current;
+    private Coordinates _move;
+    public int[] CurrentCoordinate
     {
-        get { return _currentCoordinates.CoordinatesArray; }
+        get { return _current.CoordinatesArray; }
         set
         {
-            _currentCoordinates.CoordinatesArray = value;
+            _current.CoordinatesArray = value;
         }
     }
     public char CurrentCoordinateLetter
     {
-        get { return _currentCoordinates.Letter; }
+        get { return _current.Letter; }
         set
         {
-            _currentCoordinates.Letter = value;
+            _current.Letter = value;
         }
     }
     public int CurrentCoordinateNumber
     {
-        get { return _currentCoordinates.Number; }
+        get { return _current.Number; }
         set
         {
-            _currentCoordinates.Number = value;
+            _current.Number = value;
         }
     }
     public PiecsColor Color
@@ -73,28 +73,28 @@ internal class Pieces
             }
         }
     }
-    public int[] MoveCoordinateArray
+    public int[] MoveCoordinate
     {
-        get { return _moveCoordinates.CoordinatesArray; }
+        get { return _move.CoordinatesArray; }
         set
         {
-            _moveCoordinates.CoordinatesArray = value;
+            _move.CoordinatesArray = value;
         }
     }
     public char MoveCoordinateLetter
     {
-        get { return _moveCoordinates.Letter; }
+        get { return _move.Letter; }
         set
         {
-            _moveCoordinates.Letter = value;
+            _move.Letter = value;
         }
     }
     public int MoveCoordinateNumber
     {
-        get { return _moveCoordinates.Number; }
+        get { return _move.Number; }
         set
         {
-            _moveCoordinates.Number = value;
+            _move.Number = value;
         }
     }
     public virtual bool Move()
