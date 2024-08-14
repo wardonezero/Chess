@@ -9,6 +9,10 @@ internal class Queen : Pieces
         {
             return true;
         }
+        else
+        {
+            throw new Exception("You cannot move there");
+        }
         return false;
     }
 }

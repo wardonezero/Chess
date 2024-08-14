@@ -10,10 +10,7 @@ internal class Pieces
     public int[] CurrentCoordinate
     {
         get { return _current.CoordinatesArray; }
-        set
-        {
-            _current.CoordinatesArray = value;
-        }
+        set { _current.CoordinatesArray = value; }
     }
     public char CurrentCoordinateLetter
     {
@@ -29,6 +26,7 @@ internal class Pieces
         set
         {
             _current.Number = value;
+            CurrentCoordinate = [CurrentCoordinateLetter - 'a' + 1, CurrentCoordinateNumber];
         }
     }
     public PiecsColor Color
@@ -51,21 +49,21 @@ internal class Pieces
         get { return _pieces; }
         set
         {
-            switch ((char)value)
+            switch (value)
             {
-                case 'b':
+                case ChessPieces.Bishop:
                     _pieces = ChessPieces.Bishop;
                     break;
-                case 'k':
+                case ChessPieces.Knight:
                     _pieces = ChessPieces.Knight;
                     break;
-                case 'r':
+                case ChessPieces.Rook:
                     _pieces = ChessPieces.Rook;
                     break;
-                case 'q':
+                case ChessPieces.Queen:
                     _pieces = ChessPieces.Queen;
                     break;
-                case 'K':
+                case ChessPieces.King:
                     _pieces = ChessPieces.King;
                     break;
                 default:
@@ -76,8 +74,7 @@ internal class Pieces
     public int[] MoveCoordinate
     {
         get { return _move.CoordinatesArray; }
-        set
-        {
+        set { 
             _move.CoordinatesArray = value;
         }
     }
@@ -95,10 +92,23 @@ internal class Pieces
         set
         {
             _move.Number = value;
+            MoveCoordinate = [MoveCoordinateLetter - 'a' + 1, MoveCoordinateNumber];
         }
     }
     public virtual bool Move()
     {
         return false;
+    }
+    public static Pieces Create(char f)
+    {
+        return f switch
+        {
+            'b' => new Bishop(),
+            'K' => new King(),
+            'k' => new Knight(),
+            'q' => new Queen(),
+            'r' => new Rook(),
+            _ => throw new ArgumentException("There is no such piece")
+        };
     }
 }
