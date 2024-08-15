@@ -9,82 +9,79 @@ Pieces player1;
 char playPiece;
 while (true)
 {
-    while (true)
+    Write("Choose your chess piece.\nBishop  Knight  Rook  Queen  King: ");
+    try
     {
-        Write("Choose your chess piece.\nBishop  Knight  Rook  Queen  King: ");
-        try
-        {
-            player1 = Create(ReadKey().KeyChar);
-            player1.PiecsChar = (ChessPieces)Enum.Parse(typeof(ChessPieces),player1.GetType().Name);
-            break;
-        }
-        catch (Exception e)
-        {
-            ForegroundColor = ConsoleColor.Red;
-            WriteLine($"\n{e.Message}");
-            ForegroundColor = ConsoleColor.Gray;
-        }
+        player1 = Create(ReadKey().KeyChar);
+        player1.PiecsChar = (ChessPieces)Enum.Parse(typeof(ChessPieces), player1.GetType().Name);
+        break;
     }
-    while (true)
+    catch (Exception e)
     {
-        Write("\nChoose White or Black color: ");
-        try
-        {
-            player1.Color = (PiecsColor)ReadKey().KeyChar;
-            break;
-        }
-        catch (Exception e)
-        {
-            ForegroundColor = ConsoleColor.Red;
-            WriteLine($"\n{e.Message}");
-            ForegroundColor = ConsoleColor.Gray;
-        }
+        ForegroundColor = ConsoleColor.Red;
+        WriteLine($"\n{e.Message}");
+        ForegroundColor = ConsoleColor.Gray;
     }
-    Write("\nEnter coordinates: ");
-    do
-    {
-        try
-        {
-            player1.CurrentCoordinateLetter = ReadKey().KeyChar;
-            player1.CurrentCoordinateNumber = ReadKey().KeyChar;
-            break;
-        }
-        catch (Exception e)
-        {
-            ForegroundColor = ConsoleColor.Red;
-            WriteLine($"\n{e.Message}");
-            ForegroundColor = ConsoleColor.Gray;
-            Write("Enter coordinate: ");
-        }
-    } while (true);
-    WriteLine();
-    playPiece = GetPieceSymbol(player1);
-    board = FillChessBoard(playPiece, player1);
-    DisplayChessBoard(board);
-    do
-    {
-        Write("\nEnter the new coordinates: ");
-        try
-        {
-            player1.MoveCoordinateLetter = ReadKey().KeyChar;
-            player1.MoveCoordinateNumber = ReadKey().KeyChar;
-            if(player1.Move() == true)
-            {
-                player1.CurrentCoordinate = player1.MoveCoordinate;
-                WriteLine("You can move there");
-                board = FillChessBoard(playPiece, player1);
-                DisplayChessBoard(board);
-            }
-        }
-        catch (Exception e)
-        {
-            ForegroundColor = ConsoleColor.Red;
-            WriteLine($"\n{e.Message}");
-            ForegroundColor = ConsoleColor.Gray;
-            Write("Enter coordinate: ");
-        }
-    } while (true);
 }
+while (true)
+{
+    Write("\nChoose White or Black color: ");
+    try
+    {
+        player1.Color = (PiecsColor)ReadKey().KeyChar;
+        break;
+    }
+    catch (Exception e)
+    {
+        ForegroundColor = ConsoleColor.Red;
+        WriteLine($"\n{e.Message}");
+        ForegroundColor = ConsoleColor.Gray;
+    }
+}
+Write("\nEnter coordinates: ");
+do
+{
+    try
+    {
+        player1.CurrentCoordinateLetter = ReadKey().KeyChar;
+        player1.CurrentCoordinateNumber = ReadKey().KeyChar;
+        break;
+    }
+    catch (Exception e)
+    {
+        ForegroundColor = ConsoleColor.Red;
+        WriteLine($"\n{e.Message}");
+        ForegroundColor = ConsoleColor.Gray;
+        Write("Enter coordinate: ");
+    }
+} while (true);
+WriteLine();
+playPiece = GetPieceSymbol(player1);
+board = FillChessBoard(playPiece, player1);
+DisplayChessBoard(board);
+do
+{
+    Write("\nEnter the new coordinates: ");
+    try
+    {
+        player1.MoveCoordinateLetter = ReadKey().KeyChar;
+        player1.MoveCoordinateNumber = ReadKey().KeyChar;
+        if (player1.Move() == true)
+        {
+            player1.CurrentCoordinate = player1.MoveCoordinate;
+            WriteLine("\nYou can move there");
+            board = FillChessBoard(playPiece, player1);
+            DisplayChessBoard(board);
+        }
+    }
+    catch (Exception e)
+    {
+        ForegroundColor = ConsoleColor.Red;
+        WriteLine($"\n{e.Message}");
+        ForegroundColor = ConsoleColor.Gray;
+        Write("Enter coordinate: ");
+    }
+} while (true);
 static void DisplayChessBoard(char[,] board)
 {
     for (int i = 0; i <= 8; i++)
