@@ -1,7 +1,7 @@
 ﻿using System.Transactions;
 
 namespace Chess;
-internal class Pieces
+internal abstract class Pieces
 {
     private PiecsColor _color;
     private static ChessPieces _pieces;
