@@ -8,4 +8,12 @@ internal class Rook : Pieces
         else
             throw new Exception("You cannot move there");
     }
-} 
+    public override bool CanMove(int i, int j)
+    {
+        int x = CurrentCoordinate[0];
+        int y = CurrentCoordinate[1];
+        if (y == i || x == j)
+            return true;
+        return false;
+    }
+}

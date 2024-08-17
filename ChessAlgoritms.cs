@@ -77,7 +77,7 @@ internal static class ChessAlgoritms
                     board[i, j] = ' ';
             }
         }
-        board[9 - player.CurrentCoordinate[1], player.CurrentCoordinate[0]] = playPiece;
+        board[player.CurrentCoordinate[1], player.CurrentCoordinate[0]] = playPiece;
         return board;
     }
     public static char GetPieceSymbol(Pieces playerPieces)

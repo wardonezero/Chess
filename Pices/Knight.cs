@@ -10,4 +10,12 @@ internal class Knight : Pieces
         else
             throw new Exception("You cannot move there");
     }
+    public override bool CanMove(int i, int j)
+    {
+        int x = j - CurrentCoordinate[0];
+        int y = i - CurrentCoordinate[1];
+        if ((x == 2 || x == -2) && (y == 1 || y == -1) || (x == 1 || x == -1) && (y == 2 || y == -2))
+            return true;
+        return false;
+    }
 }

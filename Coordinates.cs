@@ -31,7 +31,7 @@ internal struct Coordinates
         {
             if (value >= 49 && value <= 56)
             {
-                _number = value - 48;
+                _number = 57-value;
             }
             else
             {

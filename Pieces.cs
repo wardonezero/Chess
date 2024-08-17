@@ -95,10 +95,8 @@ internal abstract class Pieces
             MoveCoordinate = [MoveCoordinateLetter - 'a' + 1, MoveCoordinateNumber];
         }
     }
-    public virtual bool Move()
-    {
-        return false;
-    }
+    public abstract bool Move();
+    public abstract bool CanMove(int i, int j);
     public static Pieces Create(char f)
     {
         return f switch

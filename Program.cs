@@ -58,7 +58,7 @@ do
 WriteLine();
 playPiece = GetPieceSymbol(player1);
 board = FillChessBoard(playPiece, player1);
-DisplayChessBoard(board);
+DisplayChessBoard(board, player1);
 do
 {
     Write("\nEnter the new coordinates: ");
@@ -71,7 +71,7 @@ do
             player1.CurrentCoordinate = player1.MoveCoordinate;
             WriteLine("\nYou can move there");
             board = FillChessBoard(playPiece, player1);
-            DisplayChessBoard(board);
+            DisplayChessBoard(board, player1);
         }
     }
     catch (Exception e)
@@ -82,7 +82,7 @@ do
         Write("Enter coordinate: ");
     }
 } while (true);
-static void DisplayChessBoard(char[,] board)
+static void DisplayChessBoard(char[,] board, Pieces player)
 {
     for (int i = 0; i <= 8; i++)
     {
@@ -101,6 +101,11 @@ static void DisplayChessBoard(char[,] board)
             else
             {
                 BackgroundColor = ConsoleColor.Black;
+                ForegroundColor = ConsoleColor.DarkGray;
+            }
+            if (i != 0 && j != 0 && player.CanMove(i, j))
+            {
+                BackgroundColor = ConsoleColor.Green;
                 ForegroundColor = ConsoleColor.DarkGray;
             }
             Write($" {board[i, j]} ");
