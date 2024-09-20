@@ -1,4 +1,6 @@
-﻿namespace Chess;
+﻿using System.Collections;
+
+namespace Chess;
 internal abstract class Pieces
 {
     private PieceColors _color;
@@ -60,7 +62,7 @@ internal abstract class Pieces
     public int[] MoveCoordinate
     {
         get => _move.CoordinatesArray;
-        set { }
+        set { _move.CoordinatesArray = [MoveCoordinateLetter - 'a', MoveCoordinateNumber]; }
     }
     public char MoveCoordinateLetter
     {
@@ -73,7 +75,7 @@ internal abstract class Pieces
         set
         {
             _move.Number = value;
-            MoveCoordinate = [MoveCoordinateLetter - 'a' + 1, MoveCoordinateNumber];
+            MoveCoordinate = [MoveCoordinateLetter - 'a', MoveCoordinateNumber];
         }
     }
     public abstract bool Move();

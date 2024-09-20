@@ -6,6 +6,7 @@ internal class Board
     public char[,] board = new char[8, 8];
     private Pieces[] pieces = new Pieces[16];
     int[] eachPiece = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    int playingPieceID;
 
     public PieceColors PlayerColor { get; set; }
 
@@ -22,27 +23,28 @@ internal class Board
     }
     public char[,] DefaultBoard()
     {
+        DefaultBoardPieces();
         for (int i = 0; i < 16; i++)
         {
             board[pieces[i].CurrentCoordinate[1], pieces[i].CurrentCoordinate[0]] = GetPieceSymbol(pieces[i]);
         }
         return board;
     }
-    public Pieces[] DefaultBoardPieces()
+    private Pieces[] DefaultBoardPieces()
     {
         pieces[0] = new Rook();
         pieces[0].Color = PieceColors.White;
         pieces[0].CurrentCoordinateLetter = 'a';
         pieces[0].CurrentCoordinateNumber = 49;
-        
+
 
         pieces[1] = new Knight();
-        pieces[1].Color = PieceColors.White; 
+        pieces[1].Color = PieceColors.White;
         pieces[1].CurrentCoordinateLetter = 'b';
         pieces[1].CurrentCoordinateNumber = 49;
 
         pieces[2] = new Bishop();
-        pieces[2].Color = PieceColors.White; 
+        pieces[2].Color = PieceColors.White;
         pieces[2].CurrentCoordinateLetter = 'c';
         pieces[2].CurrentCoordinateNumber = 49;
 
@@ -57,12 +59,12 @@ internal class Board
         pieces[4].CurrentCoordinateNumber = 49;
 
         pieces[5] = new Bishop();
-        pieces[5].Color = PieceColors.White; 
+        pieces[5].Color = PieceColors.White;
         pieces[5].CurrentCoordinateLetter = 'f';
         pieces[5].CurrentCoordinateNumber = 49;
 
         pieces[6] = new Knight();
-        pieces[6].Color = PieceColors.White; 
+        pieces[6].Color = PieceColors.White;
         pieces[6].CurrentCoordinateLetter = 'g';
         pieces[6].CurrentCoordinateNumber = 49;
 
@@ -77,17 +79,17 @@ internal class Board
         pieces[8].CurrentCoordinateNumber = 56;
 
         pieces[9] = new Knight();
-        pieces[9].Color = PieceColors.Black; 
+        pieces[9].Color = PieceColors.Black;
         pieces[9].CurrentCoordinateLetter = 'b';
         pieces[9].CurrentCoordinateNumber = 56;
 
         pieces[10] = new Bishop();
-        pieces[10].Color = PieceColors.Black;  
+        pieces[10].Color = PieceColors.Black;
         pieces[10].CurrentCoordinateLetter = 'c';
         pieces[10].CurrentCoordinateNumber = 56;
 
         pieces[11] = new Queen();
-        pieces[11].Color = PieceColors.Black; 
+        pieces[11].Color = PieceColors.Black;
         pieces[11].CurrentCoordinateLetter = 'd';
         pieces[11].CurrentCoordinateNumber = 56;
 
@@ -97,7 +99,7 @@ internal class Board
         pieces[12].CurrentCoordinateNumber = 56;
 
         pieces[13] = new Bishop();
-        pieces[13].Color = PieceColors.Black;  
+        pieces[13].Color = PieceColors.Black;
         pieces[13].CurrentCoordinateLetter = 'f';
         pieces[13].CurrentCoordinateNumber = 56;
 
@@ -113,16 +115,34 @@ internal class Board
         return pieces;
     }
 
-    public bool ChoosePiece(Coordinates c )
+    public bool ChoosePiece(Coordinates c)
     {
         for (int i = 0; i < 16; i++)
         {
-            if (c.CoordinatesArray[0] == pieces[i].CurrentCoordinate[0]&& c.CoordinatesArray[1] == pieces[i].CurrentCoordinate[1])
+            if (c.CoordinatesArray[0] == pieces[i].CurrentCoordinate[0] && c.CoordinatesArray[1] == pieces[i].CurrentCoordinate[1] && PlayerColor == pieces[i].Color)
             {
+                playingPieceID = i;
                 return true;
             }
         }
-        return false;
+        throw new ArgumentException ("Coorinate or empty or wrong");
+    }
+
+    public Pieces MovePiece(char l, int n)
+    {
+        pieces[playingPieceID].MoveCoordinateLetter = l;
+        pieces[playingPieceID].MoveCoordinateNumber = n;
+        pieces[playingPieceID].MoveCoordinate = [l - 'a', n];
+        if (pieces[playingPieceID].Move())
+        {
+            board[pieces[playingPieceID].CurrentCoordinate[1], pieces[playingPieceID].CurrentCoordinate[0]] = ' ';
+            pieces[playingPieceID].CurrentCoordinateLetter = l;
+            pieces[playingPieceID].CurrentCoordinateNumber = n;
+            pieces[playingPieceID].CurrentCoordinate = pieces[playingPieceID].MoveCoordinate;
+            board[pieces[playingPieceID].CurrentCoordinate[1], pieces[playingPieceID].CurrentCoordinate[0]] = GetPieceSymbol(pieces[playingPieceID]);
+            return pieces[playingPieceID];
+        }
+        throw new ArgumentException("Somthing went wrong");
     }
 
     /*public void PutPieceInBoard(char charPiece, Pieces piece)
@@ -228,4 +248,6 @@ internal class Board
             return true;
         else return false;
     }
+
+    public Pieces GetPiece() => pieces[playingPieceID];
 }
