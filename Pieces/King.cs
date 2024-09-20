@@ -1,6 +1,8 @@
 ﻿namespace Chess;
 internal class King : Pieces
 {
+    public override ChessPieces Piece => ChessPieces.King;
+
     public override bool Move()
     {
         int x = MoveCoordinate[0] - CurrentCoordinate[0];
@@ -17,5 +19,10 @@ internal class King : Pieces
         if (x >= -1 && x <= 1 && y >= -1 && y <= 1)
             return true;
         return false;
+    }
+
+    public override bool[,] AllCoordinateWherCanMove(Board board)
+    {
+        throw new NotImplementedException();
     }
 }

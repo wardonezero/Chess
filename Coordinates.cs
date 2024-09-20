@@ -5,13 +5,12 @@ internal struct Coordinates
     private int _number;
     private int[] _coordinates;
     public int[] CoordinatesArray
-    {
-        get { return _coordinates; }
-        set { _coordinates = value; }
+    { readonly get => _coordinates;
+        set => _coordinates = value;
     }
     public char Letter
     {
-        get { return _letter; }
+        readonly get => _letter;
         set
         {
             if (value >= 'a' && value <= 'h')
@@ -26,12 +25,12 @@ internal struct Coordinates
     }
     public int Number
     {
-        get { return _number; }
+        readonly get => _number;
         set
         {
             if (value >= 49 && value <= 56)
             {
-                _number = 57-value;
+                _number = 56 - value;
             }
             else
             {

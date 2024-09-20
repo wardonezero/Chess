@@ -1,4 +1,6 @@
-﻿namespace Chess;
+﻿using System;
+
+namespace Chess;
 internal static class ChessAlgoritms
 {
     /*public void Movement()
@@ -62,7 +64,7 @@ internal static class ChessAlgoritms
         char[,] board = FillChessBoard(playPiece, playercoordinates);
         DisplayChessBoard(board);
     }*/
-    public static char[,] FillChessBoard(char playPiece, Pieces player)
+    /*public static char[,] FillChessBoard(char charPiece, Pieces piece)//needet to be change to only put the player piece in board
     {
         char[,] board = new char[9, 9];
         for (int i = 0; i <= 8; i++)
@@ -77,47 +79,32 @@ internal static class ChessAlgoritms
                     board[i, j] = ' ';
             }
         }
-        board[player.CurrentCoordinate[1], player.CurrentCoordinate[0]] = playPiece;
+        board[piece.CurrentCoordinate[1], piece.CurrentCoordinate[0]] = charPiece;
         return board;
-    }
-    public static char GetPieceSymbol(Pieces playerPieces)
+    }*/
+    public static char GetPieceSymbol(Pieces piece)
     {
-        switch (playerPieces.Color)
+        return piece.Color switch
         {
-            case PiecsColor.White:
-                switch (playerPieces.PiecsChar)
-                {
-                    case ChessPieces.Bishop:
-                        return '♗';
-                    case ChessPieces.Knight:
-                        return '♘';
-                    case ChessPieces.Rook:
-                        return '♖';
-                    case ChessPieces.Queen:
-                        return '♕';
-                    case ChessPieces.King:
-                        return '♔';
-                    default:
-                        return '♙';
-                }
-            case PiecsColor.Black:
-                switch (playerPieces.PiecsChar)
-                {
-                    case ChessPieces.Bishop:
-                        return '♝';
-                    case ChessPieces.Knight:
-                        return '♞';
-                    case ChessPieces.Rook:
-                        return '♜';
-                    case ChessPieces.Queen:
-                        return '♛';
-                    case ChessPieces.King:
-                        return '♚';
-                    default:
-                        return '♟';
-                }
-            default:
-                return ' ';
-        }
+            PieceColors.White => piece.Piece switch
+            {
+                ChessPieces.Bishop => '♗',
+                ChessPieces.Knight => '♘',
+                ChessPieces.Rook => '♖',
+                ChessPieces.Queen => '♕',
+                ChessPieces.King => '♔',
+                _ => '♙',
+            },
+            PieceColors.Black => piece.Piece switch
+            {
+                ChessPieces.Bishop => '♝',
+                ChessPieces.Knight => '♞',
+                ChessPieces.Rook => '♜',
+                ChessPieces.Queen => '♛',
+                ChessPieces.King => '♚',
+                _ => '♟',
+            },
+            _ => ' ',
+        };
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace Chess;
 internal class Rook : Pieces
 {
+    public override ChessPieces Piece => ChessPieces.Rook;
     public override bool Move()
     {
         if (CurrentCoordinate[1] == MoveCoordinate[1] || CurrentCoordinate[0] == MoveCoordinate[0])
@@ -15,5 +16,10 @@ internal class Rook : Pieces
         if (y == i || x == j)
             return true;
         return false;
+    }
+
+    public override bool[,] AllCoordinateWherCanMove(Board board)
+    {
+        throw new NotImplementedException();
     }
 }

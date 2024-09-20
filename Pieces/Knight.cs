@@ -1,11 +1,12 @@
 ﻿namespace Chess;
-internal class Bishop : Pieces
+internal class Knight : Pieces
 {
+    public override ChessPieces Piece => ChessPieces.Knight;
     public override bool Move()
     {
         int x = MoveCoordinate[0] - CurrentCoordinate[0];
         int y = MoveCoordinate[1] - CurrentCoordinate[1];
-        if (x == y || x == CurrentCoordinate[1] - MoveCoordinate[1])
+        if ((x == 2 || x == -2) && (y == 1 || y == -1) || (x == 1 || x == -1) && (y == 2 || y == -2))
             return true;
         else
             throw new Exception("You cannot move there");
@@ -14,8 +15,13 @@ internal class Bishop : Pieces
     {
         int x = j - CurrentCoordinate[0];
         int y = i - CurrentCoordinate[1];
-        if (x == y || x == CurrentCoordinate[1] - i)
+        if ((x == 2 || x == -2) && (y == 1 || y == -1) || (x == 1 || x == -1) && (y == 2 || y == -2))
             return true;
         return false;
+    }
+
+    public override bool[,] AllCoordinateWherCanMove(Board board)
+    {
+        throw new NotImplementedException();
     }
 }

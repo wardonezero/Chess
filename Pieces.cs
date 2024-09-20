@@ -1,42 +1,39 @@
-﻿using System.Transactions;
-
-namespace Chess;
+﻿namespace Chess;
 internal abstract class Pieces
 {
-    private PiecsColor _color;
-    private static ChessPieces _pieces;
+    private PieceColors _color;
+    public abstract ChessPieces Piece { get; }
     private Coordinates _current;
     private Coordinates _move;
+    protected bool[,] _canMove = new bool[9, 9];
     public int[] CurrentCoordinate
     {
-        get { return _current.CoordinatesArray; }
-        set { _current.CoordinatesArray = value; }
+        get => _current.CoordinatesArray;
+        set { _current.CoordinatesArray = [CurrentCoordinateLetter - 'a' , CurrentCoordinateNumber]; }
     }
     public char CurrentCoordinateLetter
     {
-        get { return _current.Letter; }
-        set
-        {
-            _current.Letter = value;
-        }
+        get => _current.Letter;
+        set => _current.Letter = value;
     }
     public int CurrentCoordinateNumber
     {
-        get { return _current.Number; }
+        get => _current.Number;
         set
         {
             _current.Number = value;
-            CurrentCoordinate = [CurrentCoordinateLetter - 'a' + 1, CurrentCoordinateNumber];
+            CurrentCoordinate = [CurrentCoordinateLetter - 'a', CurrentCoordinateNumber];
         }
     }
-    public PiecsColor Color
+    public PieceColors Color
     {
-        get { return _color; }
+        get => _color;
         set
         {
-            if ((char)value == 'b' || (char)value == 'w')
+            if (((char)value == 'b' || (char)value == 'w') || (value == PieceColors.White || value == PieceColors.Black))
             {
-                _color = (char)value == 'b' ? (PiecsColor)1 : 0;
+                _color = (char)value == 'b' ? (PieceColors)1 : 0;
+                _color = value == PieceColors.Black? (PieceColors)1 : 0;
             }
             else
             {
@@ -44,51 +41,35 @@ internal abstract class Pieces
             }
         }
     }
-    public ChessPieces PiecsChar
-    {
-        get { return _pieces; }
-        set
-        {
-            switch (value)
-            {
-                case ChessPieces.Bishop:
-                    _pieces = ChessPieces.Bishop;
-                    break;
-                case ChessPieces.Knight:
-                    _pieces = ChessPieces.Knight;
-                    break;
-                case ChessPieces.Rook:
-                    _pieces = ChessPieces.Rook;
-                    break;
-                case ChessPieces.Queen:
-                    _pieces = ChessPieces.Queen;
-                    break;
-                case ChessPieces.King:
-                    _pieces = ChessPieces.King;
-                    break;
-                default:
-                    throw new ArgumentException("Error 2: There is no such a piece.\n Enter b, k, r, q or  K");
-            }
-        }
-    }
+    //public ChessPieces PiecsChar
+    //{
+    //    get => _piece;
+    //    set
+    //    {
+    //        _piece = value switch
+    //        {
+    //            ChessPieces.Bishop => ChessPieces.Bishop,
+    //            ChessPieces.Knight => ChessPieces.Knight,
+    //            ChessPieces.Rook => ChessPieces.Rook,
+    //            ChessPieces.Queen => ChessPieces.Queen,
+    //            ChessPieces.King => ChessPieces.King,
+    //            _ => throw new ArgumentException("Error 2: There is no such a piece.\n Enter b, k, r, q or  K"),
+    //        };
+    //    }
+    //}
     public int[] MoveCoordinate
     {
-        get { return _move.CoordinatesArray; }
-        set { 
-            _move.CoordinatesArray = value;
-        }
+        get => _move.CoordinatesArray;
+        set { }
     }
     public char MoveCoordinateLetter
     {
-        get { return _move.Letter; }
-        set
-        {
-            _move.Letter = value;
-        }
+        get => _move.Letter;
+        set => _move.Letter = value;
     }
     public int MoveCoordinateNumber
     {
-        get { return _move.Number; }
+        get => _move.Number;
         set
         {
             _move.Number = value;
@@ -97,6 +78,7 @@ internal abstract class Pieces
     }
     public abstract bool Move();
     public abstract bool CanMove(int i, int j);
+    public abstract bool[,] AllCoordinateWherCanMove(Board board);
     public static Pieces Create(char f)
     {
         return f switch
@@ -109,4 +91,5 @@ internal abstract class Pieces
             _ => throw new ArgumentException("There is no such piece")
         };
     }
+    //public char[] GetShortName() => [Color.ToString()[0], PiecsChar.ToString().ToLowerInvariant() == "king" ? 'K' : 'k'];
 }

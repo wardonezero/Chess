@@ -4,9 +4,54 @@ using System.Text;
 using static Chess.ChessAlgoritms;
 using static System.Console;
 OutputEncoding = Encoding.UTF8;
-char[,] board;
-Pieces player1;
-char playPiece;
+Board board1 = new();
+//Pieces player1;
+//char playPiece;
+board1.EmptyBoard();
+board1.DefaultBoardPieces();
+board1.DefaultBoard();
+
+DisplayChessBoard(board1);
+
+while(true)
+{
+    Write("Choose color to play ( b / w ): ");
+    try
+    {
+
+    }
+    catch (Exception e) { }
+
+    Write("Choose coourdinate of piece in board, which you want to move: ");
+    try
+    {
+        Coordinates c = new Coordinates();
+        c.Letter = ReadKey().KeyChar;
+        c.Number = ReadKey().KeyChar;
+        c.CoordinatesArray = [c.Letter - 'a', c.Number];
+        WriteLine(board1.ChoosePiece(c));
+    }
+    catch (Exception e)
+    {
+        ForegroundColor = ConsoleColor.Red;
+        WriteLine($"\n{e.Message}");
+        ForegroundColor = ConsoleColor.Gray;
+        Write("Enter coordinate: ");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+//board1.RandomPicesInBoard(14);
+/*DisplayChessBoard1(board1.board);
 while (true)
 {
     Write("Choose your chess piece.\nBishop  Knight  Rook  Queen  King: ");
@@ -28,7 +73,7 @@ while (true)
     Write("\nChoose White or Black color: ");
     try
     {
-        player1.Color = (PiecsColor)ReadKey().KeyChar;
+        player1.Color = (PieceColors)ReadKey().KeyChar;
         break;
     }
     catch (Exception e)
@@ -57,8 +102,9 @@ do
 } while (true);
 WriteLine();
 playPiece = GetPieceSymbol(player1);
-board = FillChessBoard(playPiece, player1);
-DisplayChessBoard(board, player1);
+//board1.EmptyBoard();
+//board1.PutPieceInBoard(playPiece, player1);
+DisplayChessBoard(board1, player1);
 do
 {
     Write("\nEnter the new coordinates: ");
@@ -66,12 +112,12 @@ do
     {
         player1.MoveCoordinateLetter = ReadKey().KeyChar;
         player1.MoveCoordinateNumber = ReadKey().KeyChar;
-        if (player1.Move() == true)
+        if (player1.Move())
         {
             player1.CurrentCoordinate = player1.MoveCoordinate;
             WriteLine("\nYou can move there");
-            board = FillChessBoard(playPiece, player1);
-            DisplayChessBoard(board, player1);
+            //board1.PutPieceInBoard(playPiece, player1);
+            DisplayChessBoard(board1, player1);
         }
     }
     catch (Exception e)
@@ -81,8 +127,49 @@ do
         ForegroundColor = ConsoleColor.Gray;
         Write("Enter coordinate: ");
     }
-} while (true);
-static void DisplayChessBoard(char[,] board, Pieces player)
+} while (true);*/
+static void DisplayChessBoard(Board board/*, Pieces player*/)
+{
+    char content = ' ';
+    //player.AllCoordinateWherCanMove(board);
+    for (int i = 0; i <= 8; i++)
+    {
+        for (int j = 0; j <= 8; j++)
+        {
+            if (i == 0 || j == 0)
+            {
+                if (i == 0)
+                    content = j == 0 ? ' ' : (char)('@' + j);
+                else //if (j == 0)
+                    content = (char)('9' - i);
+                BackgroundColor = ConsoleColor.Black;
+                ForegroundColor = ConsoleColor.Gray;
+            }
+            else if ((i + j) % 2 == 0)
+            {
+                BackgroundColor = ConsoleColor.White;
+                ForegroundColor = ConsoleColor.DarkGray;
+                content = board.board[i - 1, j - 1];
+            }
+            else
+            {
+                BackgroundColor = ConsoleColor.Black;
+                ForegroundColor = ConsoleColor.DarkGray;
+                content = board.board[i - 1, j - 1];
+            }
+            //if (i != 0 && j != 0 /*&& player.CanMove(i, j)*/)
+            //{
+            //    BackgroundColor = ConsoleColor.Green;
+            //    ForegroundColor = ConsoleColor.DarkGray;
+            //}
+            Write($" {content} ");
+            BackgroundColor = ConsoleColor.Black;
+            ForegroundColor = ConsoleColor.Gray;
+        }
+        WriteLine();
+    }
+}
+static void DisplayChessBoard1(char[,] board)
 {
     for (int i = 0; i <= 8; i++)
     {
@@ -101,11 +188,6 @@ static void DisplayChessBoard(char[,] board, Pieces player)
             else
             {
                 BackgroundColor = ConsoleColor.Black;
-                ForegroundColor = ConsoleColor.DarkGray;
-            }
-            if (i != 0 && j != 0 && player.CanMove(i, j))
-            {
-                BackgroundColor = ConsoleColor.Green;
                 ForegroundColor = ConsoleColor.DarkGray;
             }
             Write($" {board[i, j]} ");
