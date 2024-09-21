@@ -8,9 +8,7 @@ Board board1 = new();
 //Pieces player1;
 //char playPiece;
 board1.EmptyBoard();
-board1.DefaultBoard();
 
-DisplayChessBoard(board1);
 
 while (true)
 {
@@ -34,19 +32,22 @@ while (true)
         ForegroundColor = ConsoleColor.Gray;
     }
 }
+board1.DefaultBoard();
+board1.RandomPicesInBoard();
+DisplayChessBoard(board1);
 while (true)
 {
     while (true)
     {
-        Write("Choose coourdinate of piece in board, which you want to move: ");
+        WriteLine("Choose coourdinate of piece in board, which you want to move: ");
         try
         {
             Coordinates c = new Coordinates();
             c.Letter = ReadKey().KeyChar;
             c.Number = ReadKey().KeyChar;
             c.CoordinatesArray = [c.Letter - 'a', c.Number];
-            board1.ChoosePiece(c);
-            WriteLine(board1.ChoosePiece(c));
+            board1.ChoosePiece(c);            
+            DisplayChessBoard(board1);
             break;
         }
         catch (Exception e)
@@ -58,7 +59,8 @@ while (true)
     }
     while (true)
     {
-        Write("\nWher you want to move? Enter the coordinates: ");
+        WriteLine($"You coosed {GetPieceSymbol(board1.GetPiece())} in {board1.GetPiece().CurrentCoordinateLetter}{8 - board1.GetPiece().CurrentCoordinateNumber}");
+        Write("Wher you want to move? Enter the coordinates: ");
         try
         {
             board1.MovePiece(ReadKey().KeyChar, ReadKey().KeyChar);
@@ -167,7 +169,6 @@ do
 static void DisplayChessBoard(Board board/*, Pieces player*/)
 {
     char content = ' ';
-    //player.AllCoordinateWherCanMove(board);
     for (int i = 0; i <= 8; i++)
     {
         for (int j = 0; j <= 8; j++)
@@ -193,7 +194,7 @@ static void DisplayChessBoard(Board board/*, Pieces player*/)
                 ForegroundColor = ConsoleColor.DarkGray;
                 content = board.board[i - 1, j - 1];
             }
-            if (i != 0 && j != 0 && board.GetPiece().CanMove(i, j))
+            if (i!=0&&j!=0&&board.GetPiece().CanMove(i-1, j-1))
             {
                 BackgroundColor = ConsoleColor.Green;
                 ForegroundColor = ConsoleColor.DarkGray;

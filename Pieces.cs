@@ -1,17 +1,15 @@
-﻿using System.Collections;
-
-namespace Chess;
+﻿namespace Chess;
 internal abstract class Pieces
 {
     private PieceColors _color;
     public abstract ChessPieces Piece { get; }
     private Coordinates _current;
     private Coordinates _move;
-    protected bool[,] _canMove = new bool[9, 9];
+    protected bool[,] _canMove = new bool[8, 8];
     public int[] CurrentCoordinate
     {
         get => _current.CoordinatesArray;
-        set { _current.CoordinatesArray = [CurrentCoordinateLetter - 'a' , CurrentCoordinateNumber]; }
+        set { _current.CoordinatesArray = [CurrentCoordinateLetter - 'a', CurrentCoordinateNumber]; }
     }
     public char CurrentCoordinateLetter
     {
@@ -32,10 +30,11 @@ internal abstract class Pieces
         get => _color;
         set
         {
-            if (((char)value == 'b' || (char)value == 'w') || (value == PieceColors.White || value == PieceColors.Black))
+          //if ((char)value == 'b' || (char)value == 'w') 
+            if ((value == PieceColors.White || value == PieceColors.Black))
             {
-                _color = (char)value == 'b' ? (PieceColors)1 : 0;
-                _color = value == PieceColors.Black? (PieceColors)1 : 0;
+                //_color = (char)value == 'b' ? (PieceColors)1 : 0;
+                _color = value;
             }
             else
             {
@@ -80,7 +79,12 @@ internal abstract class Pieces
     }
     public abstract bool Move();
     public abstract bool CanMove(int i, int j);
-    public abstract bool[,] AllCoordinateWherCanMove(Board board);
+    public abstract bool[,] AllCoordinateWherCanMove(char[,] board);
+    public bool[,] CleanCanMove()
+    {
+        Array.Clear(_canMove, 0, _canMove.Length);
+        return _canMove;
+    }
     public static Pieces Create(char f)
     {
         return f switch

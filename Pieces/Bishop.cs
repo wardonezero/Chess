@@ -23,27 +23,39 @@ internal class Bishop : Pieces
         return _canMove[i, j];
     }
 
-    public override bool[,] AllCoordinateWherCanMove(Board board)
+    public override bool[,] AllCoordinateWherCanMove(char[,] board)
     {
         int x;
         int y;
-        for (int i = 1; i <= 8; i++)
+        for (int i = 0; i < 8; i++)
         {
             y = i - CurrentCoordinate[1];
-            for (int j = 1; j <= 8; j++)
+            for (int j = 0; j < 8; j++)
             {
                 x = j - CurrentCoordinate[0];
-                if ((x == y || x == CurrentCoordinate[1] - i) && board.board[i, j] == ' ')
+                if ((x == y || x == CurrentCoordinate[1] - i) )
                 {
                     _canMove[i, j] = true;
-                }
-                else
-                {
-                    continue;
                 }
 
             }
         }
+        CheckWay(board);
         return _canMove;
+    }
+
+    public void CheckWay(char[,] board)
+    {
+        var truePositions =
+            from x in Enumerable.Range(0, 8)
+            from y in Enumerable.Range(0, 8)
+            where _canMove[x, y]
+            select (x,y);
+        foreach (var p in truePositions)
+        {
+            if (CurrentCoordinate[1] == p.y && CurrentCoordinate[0] == p.x)
+                _canMove[p.y, p.x] = false;
+
+        }
     }
 }
