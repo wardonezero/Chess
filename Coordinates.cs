@@ -2,11 +2,11 @@ namespace Chess;
 internal struct Coordinates
 {
     private char _letter;
-    private int _number;
-    private int[] _coordinates;
-    public int[] CoordinatesArray
-    { readonly get => _coordinates;
-        set => _coordinates = value;
+    private byte _number;
+    private byte[] _coordinates = new byte[2];
+
+    public Coordinates()
+    {
     }
     public char Letter
     {
@@ -19,24 +19,29 @@ internal struct Coordinates
             }
             else
             {
-                throw new ArgumentException("Error 3.1: Wrong coordinate.( a - b)");
+                throw new ArgumentException("Error ?.1: Wrong coordinate.( a - b)");
             }
         }
     }
-    public int Number
+    public byte Number
     {
         readonly get => _number;
         set
         {
-            if (value >= 49 && value <= 56)
+            if (value >= 48 && value <= 56)
             {
-                _number = 56 - value;
+                _number = (byte)(56 - value);
             }
             else
             {
-                throw new ArgumentException("Error 3.2: Wrong coordinate.( 1 - 8 )");
+                throw new ArgumentException("Error ?.2: Wrong coordinate.( 1 - 8 )");
             }
         }
+    }
+    public byte[] CoordinatesArray
+    {
+        readonly get => _coordinates;
+        set => _coordinates = value;
     }
     //private char IsLetter()
     //{

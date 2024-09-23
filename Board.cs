@@ -5,9 +5,8 @@ internal class Board
 {
     public char[,] board = new char[8, 8];
     private Pieces[] pieces = new Pieces[16];
-    int[] eachPiece = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     int playingPieceID;
-    int AIPieceID;
+    int AIPieceID = 8;
 
     public PieceColors PlayerColor { get; set; }
 
@@ -34,85 +33,133 @@ internal class Board
     }
     private Pieces[] DefaultBoardPieces()
     {
-        pieces[0] = new Rook();
-        pieces[0].Color = PlayerColor;
-        pieces[0].CurrentCoordinateLetter = 'a';
-        pieces[0].CurrentCoordinateNumber = 49;
+        pieces[0] = new Rook
+        {
+            Color = PlayerColor,
+            CurrentLetter = 'a',
+            CurrentNumber = 49,
+            CurrentCoordinate = ['a' - 'a', 56 - 49]
+        };
 
-        pieces[1] = new Knight();
-        pieces[1].Color = PlayerColor;
-        pieces[1].CurrentCoordinateLetter = 'b';
-        pieces[1].CurrentCoordinateNumber = 49;
+        pieces[1] = new Knight
+        {
+            Color = PlayerColor,
+            CurrentLetter = 'b',
+            CurrentNumber = 49,
+            CurrentCoordinate = ['b' - 'a', 56 - 49]
+        };
 
-        pieces[2] = new Bishop();
-        pieces[2].Color = PlayerColor;
-        pieces[2].CurrentCoordinateLetter = 'c';
-        pieces[2].CurrentCoordinateNumber = 49;
+        pieces[2] = new Bishop
+        {
+            Color = PlayerColor,
+            CurrentLetter = 'c',
+            CurrentNumber = 49,
+            CurrentCoordinate = ['c' - 'a', 56 - 49]
+        };
 
-        pieces[3] = new Queen();
-        pieces[3].Color = PlayerColor;
-        pieces[3].CurrentCoordinateLetter = 'd';
-        pieces[3].CurrentCoordinateNumber = 49;
+        pieces[3] = new Queen
+        {
+            Color = PlayerColor,
+            CurrentLetter = 'd',
+            CurrentNumber = 49,
+            CurrentCoordinate = ['d' - 'a', 56 - 49]
+        };
 
-        pieces[4] = new King();
-        pieces[4].Color = PlayerColor;
-        pieces[4].CurrentCoordinateLetter = 'e';
-        pieces[4].CurrentCoordinateNumber = 49;
+        pieces[4] = new King
+        {
+            Color = PlayerColor,
+            CurrentLetter = 'e',
+            CurrentNumber = 49,
+            CurrentCoordinate = ['e' - 'a', 56 - 49]
+        };
 
-        pieces[5] = new Bishop();
-        pieces[5].Color = PlayerColor;
-        pieces[5].CurrentCoordinateLetter = 'f';
-        pieces[5].CurrentCoordinateNumber = 49;
+        pieces[5] = new Bishop
+        {
+            Color = PlayerColor,
+            CurrentLetter = 'f',
+            CurrentNumber = 49,
+            CurrentCoordinate = ['f' - 'a', 56 - 49]
+        };
 
-        pieces[6] = new Knight();
-        pieces[6].Color = PlayerColor;
-        pieces[6].CurrentCoordinateLetter = 'g';
-        pieces[6].CurrentCoordinateNumber = 49;
+        pieces[6] = new Knight
+        {
+            Color = PlayerColor,
+            CurrentLetter = 'g',
+            CurrentNumber = 49,
+            CurrentCoordinate = ['g' - 'a', 56 - 49]
+        };
 
-        pieces[7] = new Rook();
-        pieces[7].Color = PlayerColor;
-        pieces[7].CurrentCoordinateLetter = 'h';
-        pieces[7].CurrentCoordinateNumber = 49;
+        pieces[7] = new Rook
+        {
+            Color = PlayerColor,
+            CurrentLetter = 'h',
+            CurrentNumber = 49,
+            CurrentCoordinate = ['h' - 'a', 56 - 49]
+        };
 
-        pieces[8] = new Rook();
-        pieces[8].Color = PlayerColor==PieceColors.Black?PieceColors.White:PieceColors.Black;
-        pieces[8].CurrentCoordinateLetter = 'a';
-        pieces[8].CurrentCoordinateNumber = 56;
+        pieces[8] = new Rook
+        {
+            Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black,
+            CurrentLetter = 'a',
+            CurrentNumber = 56,
+            CurrentCoordinate = ['a' - 'a', 56 - 56]
+        };
 
-        pieces[9] = new Knight();
-        pieces[9].Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black;
-        pieces[9].CurrentCoordinateLetter = 'b';
-        pieces[9].CurrentCoordinateNumber = 56;
+        pieces[9] = new Knight
+        {
+            Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black,
+            CurrentLetter = 'b',
+            CurrentNumber = 56,
+            CurrentCoordinate = ['b' - 'a', 56 - 56]
+        };
 
-        pieces[10] = new Bishop();
-        pieces[10].Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black;
-        pieces[10].CurrentCoordinateLetter = 'c';
-        pieces[10].CurrentCoordinateNumber = 56;
+        pieces[10] = new Bishop
+        {
+            Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black,
+            CurrentLetter = 'c',
+            CurrentNumber = 56,
+            CurrentCoordinate = ['c' - 'a', 56 - 56]
+        };
 
-        pieces[11] = new Queen();
-        pieces[11].Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black;
-        pieces[11].CurrentCoordinateLetter = 'd';
-        pieces[11].CurrentCoordinateNumber = 56;
+        pieces[11] = new Queen
+        {
+            Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black,
+            CurrentLetter = 'd',
+            CurrentNumber = 56,
+            CurrentCoordinate = ['d' - 'a', 56 - 56]
+        };
 
-        pieces[12] = new King();
-        pieces[12].Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black;
-        pieces[12].CurrentCoordinateLetter = 'e';
-        pieces[12].CurrentCoordinateNumber = 56;
+        pieces[12] = new King
+        {
+            Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black,
+            CurrentLetter = 'e',
+            CurrentNumber = 56,
+            CurrentCoordinate = ['e' - 'a', 56 - 56]
+        };
 
-        pieces[13] = new Bishop();
-        pieces[13].Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black;
-        pieces[13].CurrentCoordinateLetter = 'f';
-        pieces[13].CurrentCoordinateNumber = 56;
+        pieces[13] = new Bishop
+        {
+            Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black,
+            CurrentLetter = 'f',
+            CurrentNumber = 56,
+            CurrentCoordinate = ['f' - 'a', 56 - 56]
+        };
 
-        pieces[14] = new Knight();
-        pieces[14].Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black;
-        pieces[14].CurrentCoordinateLetter = 'g';
-        pieces[14].CurrentCoordinateNumber = 56;
+        pieces[14] = new Knight
+        {
+            Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black,
+            CurrentLetter = 'g',
+            CurrentNumber = 56,
+            CurrentCoordinate = ['g' - 'a', 56 - 56]
+        };
 
-        pieces[15] = new Rook();
-        pieces[15].Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black;
-        pieces[15].CurrentCoordinateLetter = 'h';
-        pieces[15].CurrentCoordinateNumber = 56;
+        pieces[15] = new Rook
+        {
+            Color = PlayerColor == PieceColors.Black ? PieceColors.White : PieceColors.Black,
+            CurrentLetter = 'h',
+            CurrentNumber = 56,
+            CurrentCoordinate = ['h' - 'a', 56 - 56]
+        };
         return pieces;
     }
 
@@ -123,6 +170,7 @@ internal class Board
             if (c.CoordinatesArray[0] == pieces[i].CurrentCoordinate[0] && c.CoordinatesArray[1] == pieces[i].CurrentCoordinate[1] && PlayerColor == pieces[i].Color)
             {
                 playingPieceID = i;
+                pieces[playingPieceID].CleanCanMove();
                 pieces[playingPieceID].AllCoordinateWherCanMove(board);
                 return true;
             }
@@ -130,19 +178,20 @@ internal class Board
         throw new ArgumentException("Coorinate or empty or wrong");
     }
 
-    public Pieces MovePiece(char l, int n)
+    public Pieces MovePiece(char l, byte n)
     {
-        pieces[playingPieceID].MoveCoordinateLetter = l;
-        pieces[playingPieceID].MoveCoordinateNumber = n;
-        pieces[playingPieceID].MoveCoordinate = [l - 'a', n];
-        if (pieces[playingPieceID].CanMove(pieces[playingPieceID].MoveCoordinate[1], pieces[playingPieceID].MoveCoordinate[0]))
+        pieces[playingPieceID].MoveLetter = l;
+        pieces[playingPieceID].MoveNumber = n;
+        pieces[playingPieceID].MoveCoordinate = [(byte)(pieces[playingPieceID].MoveLetter - 'a'), pieces[playingPieceID].MoveNumber];
+        if (pieces[playingPieceID].Move())
         {
             board[pieces[playingPieceID].CurrentCoordinate[1], pieces[playingPieceID].CurrentCoordinate[0]] = ' ';
-            pieces[playingPieceID].CurrentCoordinateLetter = l;
-            pieces[playingPieceID].CurrentCoordinateNumber = n;
+            pieces[playingPieceID].CurrentLetter = pieces[playingPieceID].MoveLetter;
+            pieces[playingPieceID].CurrentNumber = (byte)(48+pieces[playingPieceID].MoveNumber);
+            pieces[playingPieceID].CurrentCoordinate = pieces[playingPieceID].MoveCoordinate;
             board[pieces[playingPieceID].CurrentCoordinate[1], pieces[playingPieceID].CurrentCoordinate[0]] = GetPieceSymbol(pieces[playingPieceID]);
             pieces[playingPieceID].CleanCanMove();
-            pieces[playingPieceID].AllCoordinateWherCanMove(board);
+            //pieces[playingPieceID].AllCoordinateWherCanMove(board);
             return pieces[playingPieceID];
         }
         throw new ArgumentException("You cannot move there");
@@ -159,46 +208,38 @@ internal class Board
         if (p > 16) throw new Exception("The board can't containt more than 32 pieces");
         Random random = new();
         char randomLetter;
-        int randomNumber;
+        byte randomNumber;
         for (int i = 0; i < 8; i++)
         {
             board[0, i] = ' ';
         }
         for (byte i = 0; i < p; i++)
         {
+            AIPieceID = 8 + i;
             do
             {
                 randomLetter = (char)random.Next('a', 'i');
-                randomNumber = random.Next(50, 56);
+                randomNumber = (byte)random.Next(50, 56);
 
-                if (PlayerColor == PieceColors.White)
-                {
-                    AIPieceID = i+8;
-                    board[pieces[AIPieceID].CurrentCoordinate[1], pieces[AIPieceID].CurrentCoordinate[0]] = ' ';
-                    pieces[AIPieceID].MoveCoordinateLetter = randomLetter;
-                    pieces[AIPieceID].MoveCoordinateNumber = randomNumber;
-                }
-                else
-                {
-                    AIPieceID = i+8;
-                    board[pieces[AIPieceID].CurrentCoordinate[1], pieces[AIPieceID].CurrentCoordinate[0]] = ' ';
-                    pieces[AIPieceID].MoveCoordinateLetter = randomLetter;
-                    pieces[AIPieceID].MoveCoordinateNumber = randomNumber;
-                }
+                board[pieces[AIPieceID].CurrentCoordinate[1], pieces[AIPieceID].CurrentCoordinate[0]] = ' ';
+                pieces[AIPieceID].CurrentLetter = randomLetter;
+                pieces[AIPieceID].CurrentNumber = randomNumber;
+                pieces[AIPieceID].CurrentCoordinate = [(byte)(randomLetter - 'a'), (byte)(56 - randomNumber)];
             }
             while (!BoardChack(pieces[AIPieceID]));
             if (BoardChack(pieces[AIPieceID]))
-                board[pieces[AIPieceID].MoveCoordinate[1], pieces[AIPieceID].MoveCoordinate[0]] = GetPieceSymbol(pieces[AIPieceID]);
+                board[pieces[AIPieceID].CurrentCoordinate[1], pieces[AIPieceID].CurrentCoordinate[0]] = GetPieceSymbol(pieces[AIPieceID]);
         }
     }
 
-    public bool BoardChack(Pieces piece)
+    private bool BoardChack(Pieces piece)
     {
-        int pieceIndex = 0;
-        eachPiece = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        for (int i = 1; i < 8; i++)
+        byte pieceIndex = 0;
+        byte[] eachPiece = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+        for (int i = 0; i < 8; i++)
         {
-            for (int j = 1; j < 8; j++)
+            for (int j = 0; j < 8; j++)
             {
                 switch (board[i, j])
                 {

@@ -5,8 +5,6 @@ using static Chess.ChessAlgoritms;
 using static System.Console;
 OutputEncoding = Encoding.UTF8;
 Board board1 = new();
-//Pieces player1;
-//char playPiece;
 board1.EmptyBoard();
 
 
@@ -39,14 +37,17 @@ while (true)
 {
     while (true)
     {
-        WriteLine("Choose coourdinate of piece in board, which you want to move: ");
+        Write("Choose coourdinate of piece in board, which you want to move: ");
         try
         {
-            Coordinates c = new Coordinates();
-            c.Letter = ReadKey().KeyChar;
-            c.Number = ReadKey().KeyChar;
-            c.CoordinatesArray = [c.Letter - 'a', c.Number];
-            board1.ChoosePiece(c);            
+            Coordinates c = new()
+            {
+                Letter = ReadKey().KeyChar,
+                Number = (byte)ReadKey().KeyChar
+            };
+            c.CoordinatesArray = [(byte)(c.Letter - 'a'), c.Number];
+            WriteLine();
+            board1.ChoosePiece(c); WriteLine();
             DisplayChessBoard(board1);
             break;
         }
@@ -59,11 +60,11 @@ while (true)
     }
     while (true)
     {
-        WriteLine($"You coosed {GetPieceSymbol(board1.GetPiece())} in {board1.GetPiece().CurrentCoordinateLetter}{8 - board1.GetPiece().CurrentCoordinateNumber}");
+        WriteLine($"You coosed {GetPieceSymbol(board1.GetPiece())} in {board1.GetPiece().CurrentLetter}{8 - board1.GetPiece().CurrentNumber}");
         Write("Wher you want to move? Enter the coordinates: ");
         try
         {
-            board1.MovePiece(ReadKey().KeyChar, ReadKey().KeyChar);
+            board1.MovePiece(ReadKey().KeyChar, (byte)ReadKey().KeyChar);
             WriteLine("\nYou can move there");
             DisplayChessBoard(board1);
             break;
@@ -87,147 +88,45 @@ while (true)
 
 
 
-
-//board1.RandomPicesInBoard(14);
-/*DisplayChessBoard1(board1.board);
-while (true)
-{
-    Write("Choose your chess piece.\nBishop  Knight  Rook  Queen  King: ");
-    try
-    {
-        player1 = Create(ReadKey().KeyChar);
-        player1.PiecsChar = (ChessPieces)Enum.Parse(typeof(ChessPieces), player1.GetType().Name);
-        break;
-    }
-    catch (Exception e)
-    {
-        ForegroundColor = ConsoleColor.Red;
-        WriteLine($"\n{e.Message}");
-        ForegroundColor = ConsoleColor.Gray;
-    }
-}
-while (true)
-{
-    Write("\nChoose White or Black color: ");
-    try
-    {
-        player1.Color = (PieceColors)ReadKey().KeyChar;
-        break;
-    }
-    catch (Exception e)
-    {
-        ForegroundColor = ConsoleColor.Red;
-        WriteLine($"\n{e.Message}");
-        ForegroundColor = ConsoleColor.Gray;
-    }
-}
-Write("\nEnter coordinates: ");
-do
-{
-    try
-    {
-        player1.CurrentCoordinateLetter = ReadKey().KeyChar;
-        player1.CurrentCoordinateNumber = ReadKey().KeyChar;
-        break;
-    }
-    catch (Exception e)
-    {
-        ForegroundColor = ConsoleColor.Red;
-        WriteLine($"\n{e.Message}");
-        ForegroundColor = ConsoleColor.Gray;
-        Write("Enter coordinate: ");
-    }
-} while (true);
-WriteLine();
-playPiece = GetPieceSymbol(player1);
-//board1.EmptyBoard();
-//board1.PutPieceInBoard(playPiece, player1);
-DisplayChessBoard(board1, player1);
-do
-{
-    Write("\nEnter the new coordinates: ");
-    try
-    {
-        player1.MoveCoordinateLetter = ReadKey().KeyChar;
-        player1.MoveCoordinateNumber = ReadKey().KeyChar;
-        if (player1.Move())
-        {
-            player1.CurrentCoordinate = player1.MoveCoordinate;
-            WriteLine("\nYou can move there");
-            //board1.PutPieceInBoard(playPiece, player1);
-            DisplayChessBoard(board1, player1);
-        }
-    }
-    catch (Exception e)
-    {
-        ForegroundColor = ConsoleColor.Red;
-        WriteLine($"\n{e.Message}");
-        ForegroundColor = ConsoleColor.Gray;
-        Write("Enter coordinate: ");
-    }
-} while (true);*/
-static void DisplayChessBoard(Board board/*, Pieces player*/)
+static void DisplayChessBoard(Board board)
 {
     char content = ' ';
-    for (int i = 0; i <= 8; i++)
+    for (int i = 0; i < 10; i++)
     {
-        for (int j = 0; j <= 8; j++)
+        for (int j = 0; j < 10; j++)
         {
-            if (i == 0 || j == 0)
+            if (i == 0 || j == 0 || j == 9 || i == 9)
             {
-                if (i == 0)
-                    content = j == 0 ? ' ' : (char)('@' + j);
-                else //if (j == 0)
+                if (i == 0 || i == 9)
+                    content = j == 0 || j == 9 ? ' ' : (char)('@' + j);
+                else
                     content = (char)('9' - i);
                 BackgroundColor = ConsoleColor.Black;
                 ForegroundColor = ConsoleColor.Gray;
             }
-            else if ((i + j) % 2 == 0)
+            else if ((i + j) % 2 == 0 && i < 9 && j < 9)
             {
                 BackgroundColor = ConsoleColor.White;
                 ForegroundColor = ConsoleColor.DarkGray;
                 content = board.board[i - 1, j - 1];
             }
-            else
+            else if (i < 9 && j < 9)
             {
                 BackgroundColor = ConsoleColor.Black;
                 ForegroundColor = ConsoleColor.DarkGray;
                 content = board.board[i - 1, j - 1];
             }
-            if (i!=0&&j!=0&&board.GetPiece().CanMove(i-1, j-1))
+            if ((i > 0 && j > 0 && i < 9 && j < 9 && board.GetPiece().CanMove([(byte)(i - 1), (byte)(j - 1)])) || (i == 7 && j == 7 && board.GetPiece().CanMove([(byte)i, (byte)j])))
             {
                 BackgroundColor = ConsoleColor.Green;
                 ForegroundColor = ConsoleColor.DarkGray;
             }
+            if (i > 0 && j > 0 && i < 9 && j < 9 && board.GetPiece().CurrentCoordinate[1] == i-1 && board.GetPiece().CurrentCoordinate[0] == j-1)
+            {
+                BackgroundColor = ConsoleColor.Cyan;
+                ForegroundColor = ConsoleColor.DarkGray;
+            }
             Write($" {content} ");
-            BackgroundColor = ConsoleColor.Black;
-            ForegroundColor = ConsoleColor.Gray;
-        }
-        WriteLine();
-    }
-}
-static void DisplayChessBoard1(char[,] board)
-{
-    for (int i = 0; i <= 8; i++)
-    {
-        for (int j = 0; j <= 8; j++)
-        {
-            if (i == 0 || j == 0)
-            {
-                BackgroundColor = ConsoleColor.Black;
-                ForegroundColor = ConsoleColor.Gray;
-            }
-            else if ((i + j) % 2 == 0)
-            {
-                BackgroundColor = ConsoleColor.White;
-                ForegroundColor = ConsoleColor.DarkGray;
-            }
-            else
-            {
-                BackgroundColor = ConsoleColor.Black;
-                ForegroundColor = ConsoleColor.DarkGray;
-            }
-            Write($" {board[i, j]} ");
             BackgroundColor = ConsoleColor.Black;
             ForegroundColor = ConsoleColor.Gray;
         }
