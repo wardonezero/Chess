@@ -38,37 +38,37 @@ internal class Bishop : Pieces
             from y in Enumerable.Range(0, 8)
             where _canMove[x, y]
             select (x, y);
-        foreach (var p in truePositions)
+        foreach (var (x, y) in truePositions)
         {
-            if (CurrentCoordinate[1] == p.y && CurrentCoordinate[0] == p.x)
-                _canMove[p.y, p.x] = false;
-            if (board[p.x, p.y] != ' ')
+            if (CurrentCoordinate[1] == y && CurrentCoordinate[0] == x)
+                _canMove[y, x] = false;
+            if (board[x, y] != ' ')
             {
-                _canMove[p.x, p.y] = false;
-                if (p.x < CurrentCoordinate[1] && p.y > CurrentCoordinate[0])
+                _canMove[x, y] = false;
+                if (x < CurrentCoordinate[1] && y > CurrentCoordinate[0])
                 {
-                    for (int i = p.x - 1, j = p.y + 1; i < p.x && j > p.y && i >= 0 && j <= 7 && _canMove[i, j]; i--, j++)
+                    for (int i = x - 1, j = y + 1; i < x && j > y && i >= 0 && j <= 7 && _canMove[i, j]; i--, j++)
                     {
                         _canMove[i, j] = false;
                     }
                 }
-                if (p.x < CurrentCoordinate[1] && p.y < CurrentCoordinate[0])
+                if (x < CurrentCoordinate[1] && y < CurrentCoordinate[0])
                 {
-                    for (int i = p.x - 1, j = p.y - 1; i < p.x && j < p.y && i >= 0 && j >= 0 && _canMove[i, j]; i--, j--)
+                    for (int i = x - 1, j = y - 1; i < x && j < y && i >= 0 && j >= 0 && _canMove[i, j]; i--, j--)
                     {
                         _canMove[i, j] = false;
                     }
                 }
-                if (p.x > CurrentCoordinate[1] && p.y > CurrentCoordinate[0])
+                if (x > CurrentCoordinate[1] && y > CurrentCoordinate[0])
                 {
-                    for (int i = p.x + 1, j = p.y + 1; i > p.x && j > p.y && i <= 7 && j <= 7 && _canMove[i, j]; i++, j++)
+                    for (int i = x + 1, j = y + 1; i > x && j > y && i <= 7 && j <= 7 && _canMove[i, j]; i++, j++)
                     {
                         _canMove[i, j] = false;
                     }
                 }
-                if (p.x > CurrentCoordinate[1] && p.y < CurrentCoordinate[0])
+                if (x > CurrentCoordinate[1] && y < CurrentCoordinate[0])
                 {
-                    for (int i = p.x + 1, j = p.y - 1; i > p.x && j < p.y && i <= 7 && j <= 0 && _canMove[i, j]; i++, j--)
+                    for (int i = x + 1, j = y - 1; i > x && j < y && i <= 7 && j <= 0 && _canMove[i, j]; i++, j--)
                     {
                         _canMove[i, j] = false;
                     }

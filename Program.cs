@@ -60,7 +60,7 @@ while (true)
     }
     while (true)
     {
-        WriteLine($"You coosed {GetPieceSymbol(board1.GetPiece())} in {board1.GetPiece().CurrentLetter}{8 - board1.GetPiece().CurrentNumber}");
+        WriteLine($"You coosed {GetPieceSymbol(board1.GetPiece())} in {board1.GetPiece().CurrentLetter}{board1.GetPiece().CurrentNumber}");
         Write("Wher you want to move? Enter the coordinates: ");
         try
         {

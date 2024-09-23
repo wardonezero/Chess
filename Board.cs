@@ -183,11 +183,11 @@ internal class Board
         pieces[playingPieceID].MoveLetter = l;
         pieces[playingPieceID].MoveNumber = n;
         pieces[playingPieceID].MoveCoordinate = [(byte)(pieces[playingPieceID].MoveLetter - 'a'), pieces[playingPieceID].MoveNumber];
-        if (pieces[playingPieceID].Move())
+        if (pieces[playingPieceID].CanMove([pieces[playingPieceID].MoveCoordinate[1], pieces[playingPieceID].MoveCoordinate[0]]))
         {
             board[pieces[playingPieceID].CurrentCoordinate[1], pieces[playingPieceID].CurrentCoordinate[0]] = ' ';
             pieces[playingPieceID].CurrentLetter = pieces[playingPieceID].MoveLetter;
-            pieces[playingPieceID].CurrentNumber = (byte)(48+pieces[playingPieceID].MoveNumber);
+            pieces[playingPieceID].CurrentNumber = (byte)(48 + pieces[playingPieceID].MoveNumber);
             pieces[playingPieceID].CurrentCoordinate = pieces[playingPieceID].MoveCoordinate;
             board[pieces[playingPieceID].CurrentCoordinate[1], pieces[playingPieceID].CurrentCoordinate[0]] = GetPieceSymbol(pieces[playingPieceID]);
             pieces[playingPieceID].CleanCanMove();
@@ -234,8 +234,8 @@ internal class Board
 
     private bool BoardChack(Pieces piece)
     {
-        byte pieceIndex = 0;
-        byte[] eachPiece = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        byte pieceIndex;
+        byte[] eachPiece = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         for (int i = 0; i < 8; i++)
         {

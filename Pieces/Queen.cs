@@ -39,67 +39,67 @@ internal class Queen : Pieces
             from y in Enumerable.Range(0, 8)
             where _canMove[x, y]
             select (x, y);
-        foreach (var p in truePositions)
+        foreach (var (x, y) in truePositions)
         {
-            if (CurrentCoordinate[1] == p.y && CurrentCoordinate[0] == p.x)
-                _canMove[p.y, p.x] = false;
-            if (board[p.x, p.y] != ' ')
+            if (CurrentCoordinate[1] == y && CurrentCoordinate[0] == x)
+                _canMove[y, x] = false;
+            if (board[x, y] != ' ')
             {
-                _canMove[p.x, p.y] = false;
-                if (p.x < CurrentCoordinate[1] && p.y > CurrentCoordinate[0])
+                _canMove[x, y] = false;
+                if (x < CurrentCoordinate[1] && y > CurrentCoordinate[0])
                 {
-                    for (int i = p.x - 1, j = p.y + 1; i < p.x && j > p.y && i >= 0 && j <= 7 && _canMove[i, j]; i--, j++)
+                    for (int i = x - 1, j = y + 1; i < x && j > y && i >= 0 && j <= 7 && _canMove[i, j]; i--, j++)
                     {
                         _canMove[i, j] = false;
                     }
                 }
-                if (p.x < CurrentCoordinate[1] && p.y < CurrentCoordinate[0])
+                if (x < CurrentCoordinate[1] && y < CurrentCoordinate[0])
                 {
-                    for (int i = p.x - 1, j = p.y - 1; i < p.x && j < p.y && i >= 0 && j >= 0 && _canMove[i, j]; i--, j--)
+                    for (int i = x - 1, j = y - 1; i < x && j < y && i >= 0 && j >= 0 && _canMove[i, j]; i--, j--)
                     {
                         _canMove[i, j] = false;
                     }
                 }
-                if (p.x > CurrentCoordinate[1] && p.y > CurrentCoordinate[0])
+                if (x > CurrentCoordinate[1] && y > CurrentCoordinate[0])
                 {
-                    for (int i = p.x + 1, j = p.y + 1; i > p.x && j > p.y && i <= 7 && j <= 7 && _canMove[i, j]; i++, j++)
+                    for (int i = x + 1, j = y + 1; i > x && j > y && i <= 7 && j <= 7 && _canMove[i, j]; i++, j++)
                     {
                         _canMove[i, j] = false;
                     }
                 }
-                if (p.x > CurrentCoordinate[1] && p.y < CurrentCoordinate[0])
+                if (x > CurrentCoordinate[1] && y < CurrentCoordinate[0])
                 {
-                    for (int i = p.x + 1, j = p.y - 1; i > p.x && j < p.y && i <= 7 && j <= 0 && _canMove[i, j]; i++, j--)
+                    for (int i = x + 1, j = y - 1; i > x && j < y && i <= 7 && j <= 0 && _canMove[i, j]; i++, j--)
                     {
                         _canMove[i, j] = false;
                     }
                 }
-                if (p.x < CurrentCoordinate[1] && p.y == CurrentCoordinate[0])
+                if (x < CurrentCoordinate[1] && y == CurrentCoordinate[0])
                 {
-                    for (int i = p.x - 1; i < p.x && i >= 0 && _canMove[i, p.y]; i--)
+                    for (int i = x - 1; i < x && i >= 0 && _canMove[i, y]; i--)
                     {
-                        _canMove[i, p.y] = false;
+                        _canMove[i, y] = false;
                     }
                 }
-                if (p.x == CurrentCoordinate[1] && p.y < CurrentCoordinate[0])
+                if (x == CurrentCoordinate[1] && y < CurrentCoordinate[0])
                 {
-                    for (int j = p.y - 1; j < p.y && j >= 0 && _canMove[p.x, j]; j--)
+                    for (int j = y - 1; j < y && j >= 0 && _canMove[x, j]; j--)
                     {
-                        _canMove[p.x, j] = false;
+                        _canMove[x, j] = false;
                     }
                 }
-                if (p.x > CurrentCoordinate[1] && p.y == CurrentCoordinate[0])
+                if (x > CurrentCoordinate[1] && y == CurrentCoordinate[0])
                 {
-                    for (int i = p.x + 1; i > p.x && i <= 7 && _canMove[i, p.y]; i++)
+                    for (int i = x + 1; i > x && i <= 7 && _canMove[i, y]; i++)
                     {
-                        _canMove[i, p.y] = false;
+                        _canMove[i, y] = false;
                     }
                 }
-                if (p.x == CurrentCoordinate[1] && p.y > CurrentCoordinate[0])
+                if (x == CurrentCoordinate[1] && y > CurrentCoordinate[0])
                 {
-                    for (int j = p.y + 1; j > p.y && j <= 7 && _canMove[p.x, j]; j++)
+                    for (int j = y + 1; j > y && j <= 7 && _canMove[x, j]; j++)
                     {
-                        _canMove[p.x, j] = false;
+                        _canMove[x, j] = false;
                     }
                 }
             }
