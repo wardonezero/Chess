@@ -7,9 +7,7 @@ internal class Board
     private Pieces[] pieces = new Pieces[16];
     public int playingPieceID;
     int AIPieceID = 8;
-
     public PieceColors PlayerColor { get; set; }
-
     public char[,] EmptyBoard()
     {
         for (int i = 0; i < 8; i++)
