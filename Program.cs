@@ -121,11 +121,11 @@ static void DisplayChessBoard(Board board)
                 BackgroundColor = ConsoleColor.Green;
                 ForegroundColor = ConsoleColor.DarkGray;
             }
-            //if (i > 0 && j > 0 && i < 9 && j < 9 && board.GetPiece().CurrentCoordinate[1] == i-1 && board.GetPiece().CurrentCoordinate[0] == j-1)
-            //{
-            //    BackgroundColor = ConsoleColor.Cyan;
-            //    ForegroundColor = ConsoleColor.DarkGray;
-            //}
+            if (i > 0 && j > 0 && i < 9 && j < 9 && board.GetPiece().CurrentCoordinate[1] == i - 1 && board.GetPiece().CurrentCoordinate[0] == j - 1)
+            {
+                BackgroundColor = ConsoleColor.Cyan;
+                ForegroundColor = ConsoleColor.DarkGray;
+            }
             Write($" {content} ");
             BackgroundColor = ConsoleColor.Black;
             ForegroundColor = ConsoleColor.Gray;

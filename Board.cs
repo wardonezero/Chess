@@ -5,7 +5,7 @@ internal class Board
 {
     public char[,] board = new char[8, 8];
     private Pieces[] pieces = new Pieces[16];
-    int playingPieceID;
+    public int playingPieceID;
     int AIPieceID = 8;
 
     public PieceColors PlayerColor { get; set; }
@@ -162,7 +162,6 @@ internal class Board
         };
         return pieces;
     }
-
     public bool ChoosePiece(Coordinates c)
     {
         for (int i = 0; i < 16; i++)
@@ -203,25 +202,49 @@ internal class Board
         board[piece.CurrentCoordinate[1], piece.CurrentCoordinate[0]] = charPiece;
     }*/
 
-    public void RandomPicesInBoard(byte p = 8)
+    //public void RandomPicesInBoard(byte p = 8)//DO NOT TOUCH
+    //{
+    //    if (p > 16) throw new Exception("The board can't containt more than 32 pieces");
+    //    Random random = new();
+    //    char randomLetter;
+    //    byte randomNumber;
+    //    for (int i = 0; i < 8; i++)
+    //    {
+    //        board[0, i] = ' ';
+    //    }
+    //    for (byte i = 0; i < p; i++)
+    //    {
+    //        AIPieceID = 8 + i;
+    //        do
+    //        {
+    //            randomLetter = (char)random.Next('a', 'i');
+    //            randomNumber = (byte)random.Next(50, 56);
+
+    //            board[pieces[AIPieceID].CurrentCoordinate[1], pieces[AIPieceID].CurrentCoordinate[0]] = ' ';
+    //            pieces[AIPieceID].CurrentLetter = randomLetter;
+    //            pieces[AIPieceID].CurrentNumber = randomNumber;
+    //            pieces[AIPieceID].CurrentCoordinate = [(byte)(randomLetter - 'a'), (byte)(56 - randomNumber)];
+    //        }
+    //        while (!BoardChack(pieces[AIPieceID]));
+    //        if (BoardChack(pieces[AIPieceID]))
+    //            board[pieces[AIPieceID].CurrentCoordinate[1], pieces[AIPieceID].CurrentCoordinate[0]] = GetPieceSymbol(pieces[AIPieceID]);
+    //    }
+    //}
+    public void RandomPicesInBoard(byte p = 16)
     {
         if (p > 16) throw new Exception("The board can't containt more than 32 pieces");
         Random random = new();
         char randomLetter;
         byte randomNumber;
-        for (int i = 0; i < 8; i++)
-        {
-            board[0, i] = ' ';
-        }
+        EmptyBoard();
         for (byte i = 0; i < p; i++)
         {
-            AIPieceID = 8 + i;
+            AIPieceID = i;
             do
             {
                 randomLetter = (char)random.Next('a', 'i');
-                randomNumber = (byte)random.Next(50, 56);
-
-                board[pieces[AIPieceID].CurrentCoordinate[1], pieces[AIPieceID].CurrentCoordinate[0]] = ' ';
+                randomNumber = (byte)random.Next(49, 57);
+                
                 pieces[AIPieceID].CurrentLetter = randomLetter;
                 pieces[AIPieceID].CurrentNumber = randomNumber;
                 pieces[AIPieceID].CurrentCoordinate = [(byte)(randomLetter - 'a'), (byte)(56 - randomNumber)];
@@ -231,7 +254,6 @@ internal class Board
                 board[pieces[AIPieceID].CurrentCoordinate[1], pieces[AIPieceID].CurrentCoordinate[0]] = GetPieceSymbol(pieces[AIPieceID]);
         }
     }
-
     private bool BoardChack(Pieces piece)
     {
         byte pieceIndex;
@@ -292,12 +314,16 @@ internal class Board
             PieceColors.Black when piece.Piece == ChessPieces.King => 11,
             _ => throw new Exception("Error in pieceIndex Board.cs"),
         };
-        if (eachPiece[pieceIndex] < 2 && piece.Piece != ChessPieces.King && piece.Piece != ChessPieces.Queen && board[piece.CurrentCoordinate[1], piece.CurrentCoordinate[0]] == ' ')
+        if (eachPiece[pieceIndex] < 2 && 
+            piece.Piece != ChessPieces.King && 
+            piece.Piece != ChessPieces.Queen && 
+            board[piece.CurrentCoordinate[1], piece.CurrentCoordinate[0]] == ' ')
             return true;
-        else if (eachPiece[pieceIndex] < 1 && (piece.Piece == ChessPieces.King || piece.Piece == ChessPieces.Queen) && board[piece.CurrentCoordinate[1], piece.CurrentCoordinate[0]] == ' ')
+        else if (eachPiece[pieceIndex] < 1 && 
+            (piece.Piece == ChessPieces.King || piece.Piece == ChessPieces.Queen) && 
+            board[piece.CurrentCoordinate[1], piece.CurrentCoordinate[0]] == ' ')
             return true;
         else return false;
     }
-
     public Pieces GetPiece() => pieces[playingPieceID];
 }
